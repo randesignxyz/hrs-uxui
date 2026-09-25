@@ -24,62 +24,194 @@
        ======================================================================== -->
   <header class="global-top-header" id="global-top-header">
     <div class="top-nav-inner">
-      <div class="top-nav-left">
-        <a href="#" class="brand-badge" title="HRS Enterprise Portal">
-          <div class="brand-logo-icon">H</div>
-          <span>HRS Portal</span>
+      <div class="top-nav-main">
+        <!-- Brand Logo: IES -->
+        <a href="#ies" class="brand-badge" title="IES Portal">
+          <span class="brand-logo-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="12" cy="12" r="9" />
+              <circle cx="12" cy="12" r="3.5" fill="currentColor" />
+            </svg>
+          </span>
+          <span class="brand-title">IES</span>
         </a>
 
         <!-- Enterprise Modules Navigation Bar -->
         <nav class="module-nav-wrapper" aria-label="Enterprise Applications">
           <ul class="module-nav-list">
-            <li class="module-nav-item"><a href="#ies">IES</a></li>
-            <li class="module-nav-item"><a href="#task-list">Task List</a></li>
-            <li class="module-nav-item"><a href="#e-forms">E-Forms</a></li>
-            <li class="module-nav-item"><a href="#pm">PM</a></li>
-            <li class="module-nav-item"><a href="#fin">FIN</a></li>
-            <li class="module-nav-item"><a href="#crm">CRM</a></li>
-            <li class="module-nav-item"><a href="#pro">PRO</a></li>
-            <li class="module-nav-item active"><a href="#hrm" aria-current="page">HRM</a></li>
-            <li class="module-nav-item"><a href="#sales">Sales</a></li>
-            <li class="module-nav-item"><a href="#retailer">Retailer</a></li>
-            <li class="module-nav-item"><a href="#delivery">Delivery</a></li>
-            <li class="module-nav-item"><a href="#fot">FOT</a></li>
-            <li class="module-nav-item"><a href="#fleet">Fleet</a></li>
-            <li class="module-nav-item"><a href="#dms">DMS</a></li>
-            <li class="module-nav-item"><a href="#prod">PROD</a></li>
-            <li class="module-nav-item"><a href="#whm">WHM</a></li>
+            <li class="module-nav-item">
+              <a href="#task-list">
+                <span class="nav-item-icon">
+                  <svg viewBox="64 64 896 896" width="14" height="14" fill="currentColor">
+                    <path d="M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 728H184V184h656v656zM312 304h400v56H312zm0 152h400v56H312zm0 152h280v56H312z"/>
+                  </svg>
+                </span>
+                <span>Task List</span>
+              </a>
+            </li>
+            <li class="module-nav-item">
+              <a href="#e-forms">
+                <span class="nav-item-icon">
+                  <svg viewBox="64 64 896 896" width="14" height="14" fill="currentColor">
+                    <path d="M257.7 752h508.6l-50.6-50.6L257.7 752zm566.3-566.3c-15.6-15.6-40.9-15.6-56.6 0L678 275.1l115.9 115.9 89.4-89.4c15.7-15.7 15.7-41 0-56.7l-59.3-59.2zM216 704.3l115.9 115.9 388.9-388.9-115.9-115.9L216 704.3z"/>
+                  </svg>
+                </span>
+                <span>E-Forms</span>
+              </a>
+            </li>
+            <li class="module-nav-item">
+              <a href="#pm">
+                <span class="nav-item-icon">
+                  <svg viewBox="64 64 896 896" width="14" height="14" fill="currentColor">
+                    <path d="M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 728H184V184h656v656zM280 280h180v180H280zm0 240h180v180H280zm260-240h220v180H540zm0 240h220v180H540z"/>
+                  </svg>
+                </span>
+                <span>PM</span>
+              </a>
+            </li>
+            <li class="module-nav-item">
+              <a href="#fin">
+                <span class="nav-item-icon">
+                  <svg viewBox="64 64 896 896" width="14" height="14" fill="currentColor">
+                    <path d="M894 462c30.9-20.6 30.9-59.4 0-80L535.5 142c-13.8-9.2-31.2-9.2-45 0L132 382c-30.9 20.6-30.9 59.4 0 80l44 29.3V784c0 17.7 14.3 32 32 32h596c17.7 0 32-14.3 32-32V491.3l58-38.7zM512 216.5l272 181.3-43.5 29-228.5-152.3-228.5 152.3-43.5-29L512 216.5zM768 748H244V491.3l268-178.7 256 170.7V748z"/>
+                  </svg>
+                </span>
+                <span>FIN</span>
+              </a>
+            </li>
+            <li class="module-nav-item">
+              <a href="#crm">
+                <span class="nav-item-icon">
+                  <svg viewBox="64 64 896 896" width="14" height="14" fill="currentColor">
+                    <path d="M824.2 699.9a301.55 301.55 0 00-86.4-60.4C783 597 816 534.3 816 464c0-101.6-82.4-184-184-184s-184 82.4-184 184c0 70.3 33 133 78.2 175.5a301.55 301.55 0 00-86.4 60.4C392.6 746.5 360 804.8 360 868h48c0-123.7 100.3-224 224-224s224 100.3 224 224h48c0-63.2-32.6-121.5-79.8-168.1zM632 344c66.3 0 120 53.7 120 120s-53.7 120-120 120-120-53.7-120-120 53.7-120 120-120zm-352 80c53 0 96-43 96-96s-43-96-96-96-96 43-96 96 43 96 96 96zm0-144c26.5 0 48 21.5 48 48s-21.5 48-48 48-48-21.5-48-48 21.5-48 48-48zm-80 384c0-68.4 34.6-130.6 89-168.5-12.8-5-26.6-7.5-41-7.5-88.4 0-160 71.6-160 160v16h48v-16z"/>
+                  </svg>
+                </span>
+                <span>CRM</span>
+              </a>
+            </li>
+            <li class="module-nav-item">
+              <a href="#pro">
+                <span class="nav-item-icon">
+                  <svg viewBox="64 64 896 896" width="14" height="14" fill="currentColor">
+                    <path d="M257.7 752h508.6l-50.6-50.6L257.7 752zm566.3-566.3c-15.6-15.6-40.9-15.6-56.6 0L678 275.1l115.9 115.9 89.4-89.4c15.7-15.7 15.7-41 0-56.7l-59.3-59.2zM216 704.3l115.9 115.9 388.9-388.9-115.9-115.9L216 704.3z"/>
+                  </svg>
+                </span>
+                <span>PRO</span>
+              </a>
+            </li>
+            <li class="module-nav-item active">
+              <a href="#hrm" aria-current="page">
+                <span class="nav-item-icon">
+                  <svg viewBox="64 64 896 896" width="14" height="14" fill="currentColor">
+                    <path d="M257.7 752h508.6l-50.6-50.6L257.7 752zm566.3-566.3c-15.6-15.6-40.9-15.6-56.6 0L678 275.1l115.9 115.9 89.4-89.4c15.7-15.7 15.7-41 0-56.7l-59.3-59.2zM216 704.3l115.9 115.9 388.9-388.9-115.9-115.9L216 704.3z"/>
+                  </svg>
+                </span>
+                <span>HRM</span>
+              </a>
+            </li>
+            <li class="module-nav-item">
+              <a href="#sales">
+                <span class="nav-item-icon">
+                  <svg viewBox="64 64 896 896" width="14" height="14" fill="currentColor">
+                    <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372zm60.7-536h-84.1v-36.4c0-4.4-3.6-8-8-8h-32c-4.4 0-8 3.6-8 8V348H396c-4.4 0-8 3.6-8 8v44c0 4.4 3.6 8 8 8h108.6c24.6 0 44.6 20 44.6 44.6 0 24.6-20 44.6-44.6 44.6H440c-55.2 0-100 44.8-100 100 0 51.5 39 94 89.1 99.4v35.4c0 4.4 3.6 8 8 8h32c4.4 0 8-3.6 8-8v-35.1c54.7-3.9 98-48.4 98-103.7 0-4.4-3.6-8-8-8h-44c-4.4 0-8 3.6-8 8 0 24.6-20 44.6-44.6 44.6H440c-24.6 0-44.6-20-44.6-44.6 0-24.6 20-44.6 44.6-44.6h64.6c55.2 0 100-44.8 100-100 0-51.5-39-94-89.1-99.4V348h57.2c4.4 0 8-3.6 8-8v-44c0-4.4-3.6-8-8-8z"/>
+                  </svg>
+                </span>
+                <span>Sales</span>
+              </a>
+            </li>
+            <li class="module-nav-item">
+              <a href="#retailer">
+                <span class="nav-item-icon">
+                  <svg viewBox="64 64 896 896" width="14" height="14" fill="currentColor">
+                    <path d="M912 192H328c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h584c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 284H328c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h584c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 284H328c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h584c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM148 236c0 30.9 25.1 56 56 56s56-25.1 56-56-25.1-56-56-56-56 25.1-56 56zm0 284c0 30.9 25.1 56 56 56s56-25.1 56-56-25.1-56-56-56-56 25.1-56 56zm0 284c0 30.9 25.1 56 56 56s56-25.1 56-56-25.1-56-56-56-56 25.1-56 56z"/>
+                  </svg>
+                </span>
+                <span>Retailer</span>
+              </a>
+            </li>
+            <li class="module-nav-item">
+              <a href="#delivery">
+                <span class="nav-item-icon">
+                  <svg viewBox="64 64 896 896" width="14" height="14" fill="currentColor">
+                    <path d="M847.9 592H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h605.2L612.9 802.3a7.9 7.9 0 000 11.3l42.3 42.3c3.1 3.1 8.2 3.1 11.3 0l210.2-210.2c3.1-3.1 3.1-8.2 0-11.3L666.5 424.2a7.9 7.9 0 00-11.3 0l-42.3 42.3a7.9 7.9 0 000 11.3L757.2 612H152c-4.4 0-8-3.6-8-8v-60c0-4.4 3.6-8 8-8zM176.1 432H872c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8H266.8l144.3-134.3a7.9 7.9 0 000-11.3l-42.3-42.3a7.9 7.9 0 00-11.3 0L147.3 378.3a7.9 7.9 0 000 11.3l210.2 210.2a7.9 7.9 0 0011.3 0l42.3-42.3a7.9 7.9 0 000-11.3L266.8 432z"/>
+                  </svg>
+                </span>
+                <span>Delivery</span>
+              </a>
+            </li>
+            <li class="module-nav-item">
+              <a href="#ict">
+                <span class="nav-item-icon">
+                  <svg viewBox="64 64 896 896" width="14" height="14" fill="currentColor">
+                    <path d="M512 64C264.6 64 64 264.6 64 512v288c0 35.3 28.7 64 64 64h112c17.7 0 32-14.3 32-32V576c0-17.7-14.3-32-32-32H136v-32c0-207.7 168.3-376 376-376s376 168.3 376 376v32h-104c-17.7 0-32 14.3-32 32v256c0 17.7 14.3 32 32 32h112c35.3 0 64-28.7 64-64V512c0-247.4-200.6-448-448-448z"/>
+                  </svg>
+                </span>
+                <span>ICT</span>
+              </a>
+            </li>
+            <li class="module-nav-item">
+              <a href="#fleet">
+                <span class="nav-item-icon">
+                  <svg viewBox="64 64 896 896" width="14" height="14" fill="currentColor">
+                    <path d="M892 562l-77.9-187A32.01 32.01 0 00784.6 356H648V264c0-17.7-14.3-32-32-32H144c-17.7 0-32 14.3-32 32v440c0 17.7 14.3 32 32 32h41.4c17.5 42.5 59 72 106.6 72s89.1-29.5 106.6-72h228.8c17.5 42.5 59 72 106.6 72s89.1-29.5 106.6-72H880c17.7 0 32-14.3 32-32V594c0-12.7-7.5-24.1-20-29.9zM292 736c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm440 0c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48z"/>
+                  </svg>
+                </span>
+                <span>Fleet</span>
+              </a>
+            </li>
+            <li class="module-nav-item">
+              <a href="#dms">
+                <span class="nav-item-icon">
+                  <svg viewBox="64 64 896 896" width="14" height="14" fill="currentColor">
+                    <path d="M854.6 288.6L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326zm1.8 562H232V136h302v216a42 42 0 0042 42h216v494zM304 464h416c4.4 0 8 3.6 8 8v48c0 4.4-3.6 8-8 8H304c-4.4 0-8-3.6-8-8v-48c0-4.4 3.6-8 8-8zm0 136h416c4.4 0 8 3.6 8 8v48c0 4.4-3.6 8-8 8H304c-4.4 0-8-3.6-8-8v-48c0-4.4 3.6-8 8-8zm0 136h272c4.4 0 8 3.6 8 8v48c0 4.4-3.6 8-8 8H304c-4.4 0-8-3.6-8-8v-48c0-4.4 3.6-8 8-8z"/>
+                  </svg>
+                </span>
+                <span>DMS</span>
+              </a>
+            </li>
+            <li class="module-nav-item">
+              <a href="#prod">
+                <span class="nav-item-icon">
+                  <svg viewBox="64 64 896 896" width="14" height="14" fill="currentColor">
+                    <path d="M464 144H160c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V160c0-8.8-7.2-16-16-16zm-56 264H216V216h192v192zM864 144H560c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V160c0-8.8-7.2-16-16-16zm-56 264H616V216h192v192zM464 544H160c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V560c0-8.8-7.2-16-16-16zm-56 264H216V616h192v192zM864 544H560c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V560c0-8.8-7.2-16-16-16zm-56 264H616V616h192v192z"/>
+                  </svg>
+                </span>
+                <span>PROD</span>
+              </a>
+            </li>
+            <li class="module-nav-item">
+              <a href="#whm">
+                <span class="nav-item-icon">
+                  <svg viewBox="64 64 896 896" width="14" height="14" fill="currentColor">
+                    <path d="M832 64H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V96c0-17.7-14.3-32-32-32zm-40 824H232V136h560v752zM312 256h400v56H312zm0 160h400v56H312zm0 160h400v56H312z"/>
+                  </svg>
+                </span>
+                <span>WHM</span>
+              </a>
+            </li>
+            <li class="module-nav-item overflow-item">
+              <a href="#more" title="More modules">
+                <span class="nav-item-icon">
+                  <svg viewBox="64 64 896 896" width="14" height="14" fill="currentColor">
+                    <path d="M176 512a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"/>
+                  </svg>
+                </span>
+              </a>
+            </li>
           </ul>
         </nav>
       </div>
 
+      <!-- Right Side: User Profile Trigger -->
       <div class="top-nav-right">
-        <!-- Quick Search -->
-        <div class="nav-search-box">
-          <i data-feather="search" class="nav-search-icon" style="width: 14px; height: 14px;"></i>
-          <input type="text" class="nav-search-input" placeholder="Search employee..." id="global-search-input">
-          <span class="nav-search-shortcut">⌘K</span>
-        </div>
-
-        <!-- Notification Bell -->
-        <button class="nav-icon-btn" title="System Notifications" id="btn-notifications" aria-label="Notifications">
-          <i data-feather="bell" style="width: 16px; height: 16px;"></i>
-          <span class="nav-icon-badge" title="3 unread alerts"></span>
-        </button>
-
-        <!-- Help Guide -->
-        <button class="nav-icon-btn" title="Help & Policy" id="btn-help" aria-label="Help">
-          <i data-feather="help-circle" style="width: 16px; height: 16px;"></i>
-        </button>
-
-        <!-- Admin Profile Menu -->
-        <div class="user-profile-menu" id="admin-user-menu" title="Administrator account">
-          <div class="user-avatar-small">AA</div>
-          <div class="user-info-text">
-            <div class="user-name">Admin Admin</div>
-            <div class="user-role">HR Administrator</div>
-          </div>
-          <i data-feather="chevron-down" style="width: 14px; height: 14px; color: #94a3b8;"></i>
+        <div class="user-profile-trigger" id="admin-user-menu" title="Administrator account">
+          <span class="user-avatar-circle">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </span>
+          <span class="user-nav-name">Admin Admin</span>
         </div>
       </div>
     </div>
