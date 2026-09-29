@@ -5,7 +5,7 @@
 
 let isProgrammaticScroll = false;
 
-document.addEventListener('DOMContentLoaded', () => {
+function initApp() {
   // Initialize Feather Icons
   if (window.feather) {
     feather.replace();
@@ -41,7 +41,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (searchInput) searchInput.focus();
     }
   });
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
+}
 
 /* ==========================================================================
    1. SCROLLSPY & SECTION NAVIGATION
@@ -1223,6 +1229,35 @@ function fallbackCopy(text, label) {
     triggerToast(`Failed to copy ${label}`, 'danger');
   }
   document.body.removeChild(textArea);
+}
+
+/* ==========================================================================
+   8. TOAST NOTIFICATIONS
+   ========================================================================== */
+function triggerToast(message, type = 'info') {
+  const container = document.getElementById('toast-container');
+  if (!container) return;
+
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+
+  const iconName = type === 'success' ? 'check-circle' : type === 'danger' ? 'alert-circle' : 'info';
+  toast.innerHTML = `
+    <i data-feather="${iconName}" style="width: 15px; height: 15px; flex-shrink: 0;"></i>
+    <span>${message}</span>
+  `;
+
+  container.appendChild(toast);
+  if (window.feather) feather.replace();
+
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(10px)';
+    toast.style.transition = 'all 0.3s ease';
+    setTimeout(() => {
+      if (toast.parentNode) toast.parentNode.removeChild(toast);
+    }, 300);
+  }, 3500);
 }
 
 /* ==========================================================================
