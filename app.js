@@ -1410,6 +1410,15 @@ const TABLE_SCHEMAS = {
   }
 };
 
+// Aliases for schema lookups
+TABLE_SCHEMAS['language'] = TABLE_SCHEMAS.languages;
+TABLE_SCHEMAS['training'] = TABLE_SCHEMAS['training-course'];
+TABLE_SCHEMAS['training-courses'] = TABLE_SCHEMAS['training-course'];
+TABLE_SCHEMAS['courses'] = TABLE_SCHEMAS['training-course'];
+TABLE_SCHEMAS['certifications'] = TABLE_SCHEMAS.certification;
+TABLE_SCHEMAS['work-experience'] = TABLE_SCHEMAS.experience;
+TABLE_SCHEMAS['document'] = TABLE_SCHEMAS.documents;
+
 function getRowCellRawText(td) {
   if (!td) return '';
   // If there's an input or select, get its value
