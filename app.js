@@ -27,10 +27,12 @@ function initApp() {
     });
   });
 
-  // Keyboard shortcut listener (Escape to close drawer)
+  // Keyboard shortcut listener (Escape to close drawer and modals)
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       closeDrawer();
+      closeAddressModal();
+      closeDocumentModal();
       const openDropdowns = document.querySelectorAll('.dropdown-wrapper.open');
       openDropdowns.forEach(dd => dd.classList.remove('open'));
     }
@@ -1272,10 +1274,10 @@ const TABLE_SCHEMAS = {
     singular: 'Family Member',
     columns: [
       { key: 'name', label: 'Name', type: 'text', placeholder: 'Full Name', class: 'table-cell-title' },
-      { 
-        key: 'relationship', 
-        label: 'Relationship', 
-        type: 'select', 
+      {
+        key: 'relationship',
+        label: 'Relationship',
+        type: 'select',
         options: ['Cousin', 'Child', 'Spouse', 'Parent', 'Sibling', 'Relative', 'Other'],
         render: (val) => `<span class="badge ${val === 'Child' ? 'badge-info' : val === 'Spouse' ? 'badge-success' : 'badge-neutral'}">${val}</span>`
       },
@@ -1290,26 +1292,26 @@ const TABLE_SCHEMAS = {
     navTab: 'emergency',
     singular: 'Emergency Contact',
     columns: [
-      { 
-        key: 'name', 
-        label: 'Contact Name', 
-        type: 'text', 
+      {
+        key: 'name',
+        label: 'Contact Name',
+        type: 'text',
         placeholder: 'Contact Name',
         render: (val, isDraft) => `<div class="table-cell-title" style="display: flex; align-items: center; gap: 8px;"><span>${val}</span>${isDraft ? '<span class="badge badge-draft">Draft</span>' : ''}</div>`
       },
       { key: 'relationship', label: 'Relationship', type: 'select', options: ['Cousin', 'Child', 'Spouse', 'Parent', 'Sibling', 'Friend', 'Colleague'] },
-      { 
-        key: 'phone', 
-        label: 'Phone Number', 
-        type: 'text', 
+      {
+        key: 'phone',
+        label: 'Phone Number',
+        type: 'text',
         placeholder: '012356988',
         render: (val) => `<span style="font-family: monospace; font-weight: 600;">${val}</span> <button class="copy-pill-btn" onclick="copyToClipboard('${val}', 'Emergency Phone')"><i data-feather="copy" style="width: 11px; height: 11px;"></i></button>`
       },
       { key: 'address', label: 'Address', type: 'text', placeholder: '# Street, City' },
-      { 
-        key: 'status', 
-        label: 'Status', 
-        type: 'select', 
+      {
+        key: 'status',
+        label: 'Status',
+        type: 'select',
         options: ['Active', 'Draft', 'Awaiting HR Review'],
         render: (val) => {
           if (val === 'Active') return '<span class="badge badge-success">Active</span>';
@@ -1332,10 +1334,10 @@ const TABLE_SCHEMAS = {
       { key: 'institution', label: 'Institution', type: 'text', placeholder: 'Institution Name' },
       { key: 'country', label: 'Country', type: 'text', placeholder: 'Cambodia', default: 'Cambodia' },
       { key: 'gpa', label: 'GPA', type: 'text', placeholder: '3.7', render: (val) => `<span class="badge badge-info" style="font-weight: 700;">${val || '3.5'}</span>` },
-      { 
-        key: 'status', 
-        label: 'Status', 
-        type: 'select', 
+      {
+        key: 'status',
+        label: 'Status',
+        type: 'select',
         options: ['Graduated', 'In Progress', 'Completed', 'On Hold'],
         render: (val) => `<span class="badge badge-success">${val}</span>`
       }
@@ -1348,10 +1350,10 @@ const TABLE_SCHEMAS = {
     navTab: 'languages',
     singular: 'Language',
     columns: [
-      { 
-        key: 'language', 
-        label: 'Language', 
-        type: 'text', 
+      {
+        key: 'language',
+        label: 'Language',
+        type: 'text',
         placeholder: 'English',
         render: (val) => {
           const lower = val.toLowerCase();
@@ -1360,10 +1362,10 @@ const TABLE_SCHEMAS = {
         }
       },
       { key: 'type', label: 'Type', type: 'select', options: ['Second Language', 'Native / Mother Tongue', 'Foreign Language'] },
-      { 
-        key: 'proficiency', 
-        label: 'Proficiency Level', 
-        type: 'select', 
+      {
+        key: 'proficiency',
+        label: 'Proficiency Level',
+        type: 'select',
         options: ['Advanced (C1)', 'Beginner (A1)', 'Elementary (A2)', 'Intermediate (B1)', 'Upper Intermediate (B2)', 'Mastery (C2)', 'Native'],
         render: (val) => `<span class="badge ${val.includes('Advanced') || val.includes('Native') || val.includes('Mastery') ? 'badge-success' : 'badge-neutral'}">${val}</span>`
       },
@@ -1394,7 +1396,15 @@ const TABLE_SCHEMAS = {
       { key: 'title', label: 'Certification', type: 'text', placeholder: 'Certification Title', class: 'table-cell-title' },
       { key: 'institution', label: 'Accrediting Institution', type: 'text', placeholder: 'Accrediting Institution' },
       { key: 'issueDate', label: 'Issue Date', type: 'text', placeholder: 'Oct 2026' },
-      { key: 'description', label: 'Description', type: 'text', placeholder: 'Domain & specialization', tdClass: 'col-desc' }
+      { key: 'description', label: 'Description', type: 'text', placeholder: 'Domain & specialization', tdClass: 'col-desc' },
+      {
+        key: 'attachment',
+        label: 'Attachment',
+        type: 'file',
+        placeholder: 'certificate.pdf',
+        default: '',
+        render: (val) => val && val !== '-' ? `<a href="javascript:void(0)" class="doc-attachment-link" onclick="triggerToast('Opening ${val}', 'info')"><i data-feather="paperclip" style="width: 12px; height: 12px;"></i> ${val}</a>` : '<span style="color: #94a3b8;">—</span>'
+      }
     ]
   },
   experience: {
@@ -1418,29 +1428,36 @@ const TABLE_SCHEMAS = {
     singular: 'Document',
     columns: [
       { key: 'name', label: 'Document Name', type: 'text', placeholder: 'Document Name', class: 'table-cell-title' },
-      { 
-        key: 'category', 
-        label: 'Category', 
-        type: 'select', 
-        options: ['Identity', 'Employment', 'Certification', 'Financial', 'Legal', 'Other'],
+      {
+        key: 'category',
+        label: 'Category',
+        type: 'select',
+        options: ['Identity', 'Employment', 'Certification', 'Financial', 'Legal', 'Education', 'Health', 'Other'],
         render: (val) => `<span class="badge badge-neutral">${val}</span>`
       },
-      { key: 'uploadedDate', label: 'Uploaded Date', type: 'text', placeholder: '01 Jul 2026', default: '01 Jul 2026' },
-      { 
-        key: 'expiryDate', 
-        label: 'Expiry Date', 
-        type: 'text', 
+      { key: 'issuedDate', label: 'Issued Date', type: 'text', placeholder: '01 Jul 2026', default: '01 Jul 2026' },
+      {
+        key: 'expiryDate',
+        label: 'Expiry Date',
+        type: 'text',
         placeholder: '31 Jul 2026',
         render: (val) => val.includes('Expired') || val.includes('2026') ? `<strong style="color: #ef4444;">${val}</strong>` : val
       },
-      { 
-        key: 'status', 
-        label: 'Status', 
-        type: 'select', 
-        options: ['Valid', 'Expired', 'Expiring Soon', 'Pending'],
-        render: (val) => `<span class="badge ${val === 'Valid' ? 'badge-valid' : val === 'Expired' ? 'badge-danger' : 'badge-warning'}">${val}</span>`
+      {
+        key: 'status',
+        label: 'Status',
+        type: 'select',
+        options: ['Valid', 'Expired', 'Expiring Soon', 'Missing', 'Pending'],
+        render: (val) => `<span class="badge ${val === 'Valid' ? 'badge-valid' : val === 'Expired' ? 'badge-danger' : val === 'Missing' ? 'badge-draft' : 'badge-warning'}">${val}</span>`
       },
-      { key: 'uploadedBy', label: 'Uploaded By', type: 'text', placeholder: 'Kauv Seth Pisal', default: 'Kauv Seth Pisal' }
+      {
+        key: 'attachment',
+        label: 'Attachment',
+        type: 'file',
+        placeholder: 'document.pdf',
+        default: '',
+        render: (val) => val && val !== '-' ? `<a href="javascript:void(0)" class="doc-attachment-link" onclick="triggerToast('Opening ${val}', 'info')"><i data-feather="paperclip" style="width: 12px; height: 12px;"></i> ${val}</a>` : '<span style="color: #94a3b8;">—</span>'
+      }
     ]
   }
 };
@@ -1459,7 +1476,7 @@ function getRowCellRawText(td) {
   // If there's an input or select, get its value
   const input = td.querySelector('input, select, textarea');
   if (input) return input.value.trim();
-  
+
   // Clean clone to get pure text excluding badges/copy buttons
   const clone = td.cloneNode(true);
   clone.querySelectorAll('.copy-pill-btn, .row-action-btn, i, svg').forEach(el => el.remove());
@@ -1495,6 +1512,18 @@ function startEditTableRow(btnOrElement, tableType) {
         return `<option value="${opt}" ${isSelected ? 'selected' : ''}>${opt}</option>`;
       }).join('');
       newHtml += `<td${tdClass}><select class="table-select" data-key="${col.key}">${optionsHtml}</select></td>`;
+    } else if (col.type === 'file' || col.key === 'attachment') {
+      const displayVal = val && val !== '-' ? val : '';
+      newHtml += `
+        <td${tdClass}>
+          <input type="file" style="display: none;" onchange="handleTableAttachmentSelect(this)" accept=".pdf,.doc,.docx,.png,.jpg">
+          <input type="hidden" class="table-input" data-key="${col.key}" value="${displayVal.replace(/"/g, '&quot;')}">
+          <button type="button" class="btn btn-xs btn-secondary btn-table-upload" onclick="this.previousElementSibling.previousElementSibling.click()" style="display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; padding: 4px 8px; border-radius: 4px; white-space: nowrap; max-width: 140px;">
+            <i data-feather="${displayVal ? 'paperclip' : 'upload-cloud'}" style="width: 12px; height: 12px; flex-shrink: 0;"></i>
+            <span class="upload-btn-label" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${displayVal || 'Add Attach'}</span>
+          </button>
+        </td>
+      `;
     } else {
       newHtml += `<td${tdClass}><input type="text" class="table-input" data-key="${col.key}" value="${val.replace(/"/g, '&quot;')}" placeholder="${col.placeholder || col.label}"></td>`;
     }
@@ -1545,6 +1574,18 @@ function addNewTableRow(tableType) {
     if (col.type === 'select') {
       const optionsHtml = col.options.map((opt, i) => `<option value="${opt}" ${i === 0 ? 'selected' : ''}>${opt}</option>`).join('');
       cellsHtml += `<td${tdClass}><select class="table-select" data-key="${col.key}">${optionsHtml}</select></td>`;
+    } else if (col.type === 'file' || col.key === 'attachment') {
+      const defVal = col.default || '';
+      cellsHtml += `
+        <td${tdClass}>
+          <input type="file" style="display: none;" onchange="handleTableAttachmentSelect(this)" accept=".pdf,.doc,.docx,.png,.jpg">
+          <input type="hidden" class="table-input" data-key="${col.key}" value="${defVal}">
+          <button type="button" class="btn btn-xs btn-secondary btn-table-upload" onclick="this.previousElementSibling.previousElementSibling.click()" style="display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; padding: 4px 8px; border-radius: 4px; white-space: nowrap; max-width: 140px;">
+            <i data-feather="${defVal ? 'paperclip' : 'upload-cloud'}" style="width: 12px; height: 12px; flex-shrink: 0;"></i>
+            <span class="upload-btn-label" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${defVal || 'Add Attach'}</span>
+          </button>
+        </td>
+      `;
     } else {
       const defVal = col.default || '';
       cellsHtml += `<td${tdClass}><input type="text" class="table-input" data-key="${col.key}" value="${defVal}" placeholder="${col.placeholder || col.label}"></td>`;
@@ -1621,15 +1662,27 @@ function saveTableRow(btnOrElement, tableType) {
 
   rowHtml += `
     <td class="table-actions-cell" onclick="event.stopPropagation();">
-      <button class="row-action-btn" title="View Details" onclick="viewTableRowDetails(this, '${tableType}')">
-        <i data-feather="eye" style="width: 14px; height: 14px;"></i>
-      </button>
-      <button class="row-action-btn" title="Edit" onclick="startEditTableRow(this, '${tableType}')">
-        <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
-      </button>
-      <button class="row-action-btn" title="Delete" onclick="deleteTableRow(this, '${tableType}')">
-        <i data-feather="trash-2" style="width: 14px; height: 14px;"></i>
-      </button>
+      <div class="dropdown-wrapper">
+        <button class="row-action-btn table-more-btn" title="More Actions" onclick="toggleDropdownMenu(this.parentElement)">
+          <i data-feather="more-vertical" style="width: 15px; height: 15px;"></i>
+        </button>
+        <div class="dropdown-menu">
+          <button class="dropdown-item" onclick="viewTableRowDetails(this, '${tableType}')">
+            <i data-feather="eye" style="width: 13px; height: 13px;"></i> View Details
+          </button>
+          <button class="dropdown-item" onclick="startEditTableRow(this, '${tableType}')">
+            <i data-feather="edit-2" style="width: 13px; height: 13px;"></i> Edit
+          </button>
+          ${tableType === 'documents' || tableType === 'document' ? `
+          <button class="dropdown-item" onclick="triggerToast('Downloading document...', 'info')">
+            <i data-feather="download" style="width: 13px; height: 13px;"></i> Download
+          </button>` : ''}
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item danger" onclick="deleteTableRow(this, '${tableType}')">
+            <i data-feather="trash-2" style="width: 13px; height: 13px;"></i> Delete
+          </button>
+        </div>
+      </div>
     </td>
   `;
 
@@ -1713,7 +1766,7 @@ function updateTableSectionCounts(tableType) {
       if (schema.navTab === 'training') {
         // Training section contains both courses and certifications
         const totalTraining = (document.querySelector(TABLE_SCHEMAS['training-course'].tbodySelector)?.querySelectorAll('tr').length || 0) +
-                              (document.querySelector(TABLE_SCHEMAS['certification'].tbodySelector)?.querySelectorAll('tr').length || 0);
+          (document.querySelector(TABLE_SCHEMAS['certification'].tbodySelector)?.querySelectorAll('tr').length || 0);
         navBadge.textContent = totalTraining;
       } else if (schema.navTab === 'documents') {
         navBadge.textContent = `${count}/${count}`;
@@ -1722,6 +1775,164 @@ function updateTableSectionCounts(tableType) {
       }
     }
   }
+}
+
+/* ==========================================================================
+   11. ADDRESS EDIT MODAL CONTROLLER
+   ========================================================================== */
+let currentAddressModalType = 'all';
+
+function openAddressModal(addressType = 'all') {
+  currentAddressModalType = addressType;
+  const backdrop = document.getElementById('address-modal-backdrop');
+  const titleEl = document.getElementById('address-modal-title');
+  const subtitleEl = document.getElementById('address-modal-subtitle');
+  const bodyEl = document.getElementById('address-modal-body');
+  if (!backdrop || !bodyEl) return;
+
+  const pobVal = document.getElementById('val-pob')?.textContent.trim() || '';
+  const permVal = document.getElementById('val-perm-address')?.textContent.trim() || '';
+  const currVal = document.getElementById('val-curr-address')?.textContent.trim() || '';
+
+  if (addressType === 'pob') {
+    titleEl.textContent = 'Edit Place of Birth';
+    subtitleEl.textContent = 'Update registered birth province and country';
+    bodyEl.innerHTML = `
+      <div class="form-group">
+        <label class="form-label" for="modal-input-pob">Place of Birth <span class="required">*</span></label>
+        <textarea class="form-textarea" id="modal-input-pob" rows="3" required placeholder="e.g. Prek Preah Sdach, Battambang Province, Cambodia">${pobVal}</textarea>
+        <div class="form-hint" style="font-size: 11.5px; color: #64748b; margin-top: 4px;">Enter village/sangkat, district, province and country as recorded in legal documents.</div>
+      </div>
+    `;
+  } else if (addressType === 'permanent') {
+    titleEl.textContent = 'Edit Permanent Address';
+    subtitleEl.textContent = 'Update official registered permanent address';
+    bodyEl.innerHTML = `
+      <div class="form-group">
+        <label class="form-label" for="modal-input-perm-address">Permanent Address <span class="required">*</span></label>
+        <textarea class="form-textarea" id="modal-input-perm-address" rows="3" required placeholder="e.g. Building No. 888K, Sangkat Toul Sangke, 12105, Road 598, Phnom Penh">${permVal}</textarea>
+        <div class="form-hint" style="font-size: 11.5px; color: #64748b; margin-top: 4px;">Official permanent residence as registered in family book / residency book.</div>
+      </div>
+    `;
+  } else if (addressType === 'current') {
+    titleEl.textContent = 'Edit Current Residential Address';
+    subtitleEl.textContent = 'Update employee current living residence';
+    bodyEl.innerHTML = `
+      <div class="form-group">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+          <label class="form-label" for="modal-input-curr-address" style="margin-bottom: 0;">Current Residential Address <span class="required">*</span></label>
+          <button type="button" class="btn-quick-helper" onclick="copyPermToCurrentInModal()">
+            <i data-feather="copy" style="width: 11px; height: 11px;"></i> Same as Permanent
+          </button>
+        </div>
+        <textarea class="form-textarea" id="modal-input-curr-address" rows="3" required placeholder="e.g. Building No. 888K, Sangkat Toul Sangke, 12105, Road 598, Phnom Penh">${currVal}</textarea>
+        <div class="form-hint" style="font-size: 11.5px; color: #64748b; margin-top: 4px;">Current actual residential location for official correspondence and emergencies.</div>
+      </div>
+    `;
+  } else {
+    titleEl.textContent = 'Edit Address Information';
+    subtitleEl.textContent = 'Update place of birth, permanent and current residential address';
+    bodyEl.innerHTML = `
+      <div class="form-group">
+        <label class="form-label" for="modal-input-pob">Place of Birth <span class="required">*</span></label>
+        <input type="text" class="form-input" id="modal-input-pob" value="${pobVal}" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="modal-input-perm-address">Permanent Address <span class="required">*</span></label>
+        <input type="text" class="form-input" id="modal-input-perm-address" value="${permVal}" required>
+      </div>
+      <div class="form-group">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+          <label class="form-label" for="modal-input-curr-address" style="margin-bottom: 0;">Current Residential Address <span class="required">*</span></label>
+          <button type="button" class="btn-quick-helper" onclick="copyPermToCurrentInModal()">
+            <i data-feather="copy" style="width: 11px; height: 11px;"></i> Same as Permanent
+          </button>
+        </div>
+        <input type="text" class="form-input" id="modal-input-curr-address" value="${currVal}" required>
+      </div>
+    `;
+  }
+
+  backdrop.style.display = 'flex';
+  setTimeout(() => {
+    backdrop.classList.add('open');
+    if (window.feather) feather.replace();
+    const firstInput = bodyEl.querySelector('input, textarea');
+    if (firstInput) firstInput.focus();
+  }, 10);
+}
+
+function copyPermToCurrentInModal() {
+  const permVal = document.getElementById('val-perm-address')?.textContent.trim() || '';
+  const currInput = document.getElementById('modal-input-curr-address');
+  if (currInput) {
+    currInput.value = permVal;
+    triggerToast('Copied Permanent Address to Current Address', 'info');
+  }
+}
+
+function closeAddressModal(e) {
+  if (e && e.target && e.target !== document.getElementById('address-modal-backdrop') && !e.currentTarget?.classList.contains('modal-close-btn') && !e.currentTarget?.classList.contains('btn-secondary')) {
+    return;
+  }
+  const backdrop = document.getElementById('address-modal-backdrop');
+  if (!backdrop) return;
+  backdrop.classList.remove('open');
+  setTimeout(() => {
+    backdrop.style.display = 'none';
+  }, 200);
+}
+
+function saveAddressModal(e) {
+  if (e) e.preventDefault();
+
+  let label = 'Address';
+  if (currentAddressModalType === 'pob') {
+    const input = document.getElementById('modal-input-pob');
+    if (input && input.value.trim()) {
+      const valEl = document.getElementById('val-pob');
+      if (valEl) valEl.textContent = input.value.trim();
+      label = 'Place of Birth';
+    }
+  } else if (currentAddressModalType === 'permanent') {
+    const input = document.getElementById('modal-input-perm-address');
+    if (input && input.value.trim()) {
+      const valEl = document.getElementById('val-perm-address');
+      if (valEl) valEl.textContent = input.value.trim();
+      label = 'Permanent Address';
+    }
+  } else if (currentAddressModalType === 'current') {
+    const input = document.getElementById('modal-input-curr-address');
+    if (input && input.value.trim()) {
+      const valEl = document.getElementById('val-curr-address');
+      if (valEl) valEl.textContent = input.value.trim();
+      label = 'Current Address';
+    }
+  } else {
+    const pob = document.getElementById('modal-input-pob');
+    const perm = document.getElementById('modal-input-perm-address');
+    const curr = document.getElementById('modal-input-curr-address');
+    if (pob && pob.value.trim()) {
+      const pobEl = document.getElementById('val-pob');
+      if (pobEl) pobEl.textContent = pob.value.trim();
+    }
+    if (perm && perm.value.trim()) {
+      const permEl = document.getElementById('val-perm-address');
+      if (permEl) permEl.textContent = perm.value.trim();
+    }
+    if (curr && curr.value.trim()) {
+      const currEl = document.getElementById('val-curr-address');
+      if (currEl) currEl.textContent = curr.value.trim();
+    }
+    label = 'Address Information';
+  }
+
+  const backdrop = document.getElementById('address-modal-backdrop');
+  if (backdrop) {
+    backdrop.classList.remove('open');
+    setTimeout(() => { backdrop.style.display = 'none'; }, 200);
+  }
+  triggerToast(`${label} updated successfully!`, 'success');
 }
 
 // Expose functions to window for onclick handlers
@@ -1746,6 +1957,216 @@ window.saveCardEdit = saveCardEdit;
 window.cancelCardEdit = cancelCardEdit;
 window.copyPermanentToCurrent = copyPermanentToCurrent;
 
+// Address modal exports
+window.openAddressModal = openAddressModal;
+window.closeAddressModal = closeAddressModal;
+window.copyPermToCurrentInModal = copyPermToCurrentInModal;
+window.saveAddressModal = saveAddressModal;
+
+/* ==========================================================================
+   DOCUMENT UPLOAD MODAL CONTROLLER
+   ========================================================================== */
+let selectedDocFile = null;
+
+function openDocumentModal() {
+  const backdrop = document.getElementById('document-modal-backdrop');
+  const form = document.getElementById('document-modal-form');
+  if (!backdrop) return;
+
+  if (form) form.reset();
+  selectedDocFile = null;
+  const previewBadge = document.getElementById('doc-file-selected-badge');
+  const dropzoneTitle = document.getElementById('doc-dropzone-title');
+  const dropzoneSub = document.getElementById('doc-dropzone-subtitle');
+  if (previewBadge) previewBadge.style.display = 'none';
+  if (dropzoneTitle) dropzoneTitle.style.display = 'block';
+  if (dropzoneSub) dropzoneSub.style.display = 'block';
+
+  // Set default dates
+  const issuedInput = document.getElementById('doc-modal-issued-date');
+  const expiryInput = document.getElementById('doc-modal-expiry-date');
+  if (issuedInput) issuedInput.value = '01 Jul 2026';
+  if (expiryInput) expiryInput.value = '31 Jul 2030';
+
+  backdrop.style.display = 'flex';
+  setTimeout(() => {
+    backdrop.classList.add('open');
+    if (window.feather) feather.replace();
+    const firstInput = document.getElementById('doc-modal-name');
+    if (firstInput) firstInput.focus();
+  }, 10);
+}
+
+function closeDocumentModal(e) {
+  if (e && e.target && e.target !== document.getElementById('document-modal-backdrop') && !e.currentTarget?.classList.contains('modal-close-btn') && !e.currentTarget?.classList.contains('btn-secondary')) {
+    return;
+  }
+  const backdrop = document.getElementById('document-modal-backdrop');
+  if (!backdrop) return;
+  backdrop.classList.remove('open');
+  setTimeout(() => {
+    backdrop.style.display = 'none';
+  }, 200);
+}
+
+function handleDocFileSelect(input) {
+  if (input && input.files && input.files[0]) {
+    const file = input.files[0];
+    selectedDocFile = file;
+    const previewBadge = document.getElementById('doc-file-selected-badge');
+    const filenameEl = document.getElementById('doc-selected-filename');
+    const filesizeEl = document.getElementById('doc-selected-filesize');
+    const dropzoneTitle = document.getElementById('doc-dropzone-title');
+    const dropzoneSub = document.getElementById('doc-dropzone-subtitle');
+
+    if (filenameEl) filenameEl.textContent = file.name;
+    if (filesizeEl) {
+      const sizeKb = Math.round(file.size / 1024);
+      filesizeEl.textContent = sizeKb > 1024 ? `(${(sizeKb / 1024).toFixed(1)} MB)` : `(${sizeKb} KB)`;
+    }
+    if (previewBadge) previewBadge.style.display = 'inline-flex';
+    if (dropzoneTitle) dropzoneTitle.style.display = 'none';
+    if (dropzoneSub) dropzoneSub.style.display = 'none';
+
+    // Auto-fill document name if empty
+    const nameInput = document.getElementById('doc-modal-name');
+    if (nameInput && !nameInput.value.trim()) {
+      const cleanName = file.name.replace(/\.[^/.]+$/, '').replace(/[_-]/g, ' ');
+      nameInput.value = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
+    }
+
+    if (window.feather) feather.replace();
+  }
+}
+
+function saveDocumentModal(e) {
+  if (e) e.preventDefault();
+
+  const nameInput = document.getElementById('doc-modal-name');
+  const catInput = document.getElementById('doc-modal-category');
+  const statusInput = document.getElementById('doc-modal-status');
+  const issuedInput = document.getElementById('doc-modal-issued-date');
+  const expiryInput = document.getElementById('doc-modal-expiry-date');
+
+  const name = nameInput?.value.trim() || 'Uploaded Document';
+  const category = catInput?.value || 'Identity';
+  const status = statusInput?.value || 'Valid';
+  const issuedDate = issuedInput?.value.trim() || '01 Jul 2026';
+  const expiryDate = expiryInput?.value.trim() || '31 Jul 2030';
+  const filename = selectedDocFile?.name || (name.toLowerCase().replace(/[^a-z0-9]/g, '_') + '.pdf');
+
+  const tbody = document.getElementById('documents-table-body');
+  if (tbody) {
+    const tr = document.createElement('tr');
+    tr.setAttribute('data-category', category);
+    tr.setAttribute('data-status', status);
+    tr.setAttribute('data-name', name);
+
+    const statusBadgeClass = status === 'Valid' ? 'badge-valid' : status === 'Expired' ? 'badge-danger' : status === 'Missing' ? 'badge-draft' : 'badge-warning';
+    const isExpired = status === 'Expired' || expiryDate.includes('Expired');
+
+    tr.innerHTML = `
+      <td><div class="table-cell-title">${name}</div></td>
+      <td><span class="badge badge-neutral">${category}</span></td>
+      <td>${issuedDate}</td>
+      <td>${isExpired ? `<strong style="color: #ef4444;">${expiryDate}</strong>` : expiryDate}</td>
+      <td><span class="badge ${statusBadgeClass}">${status}</span></td>
+      <td>
+        <a href="javascript:void(0)" class="doc-attachment-link" onclick="triggerToast('Opening ${filename}', 'info')">
+          <i data-feather="paperclip" style="width: 12px; height: 12px;"></i> ${filename}
+        </a>
+      </td>
+      <td class="table-actions-cell" onclick="event.stopPropagation();">
+        <div class="dropdown-wrapper">
+          <button class="row-action-btn table-more-btn" title="More Actions" onclick="toggleDropdownMenu(this.parentElement)">
+            <i data-feather="more-vertical" style="width: 15px; height: 15px;"></i>
+          </button>
+          <div class="dropdown-menu">
+            <button class="dropdown-item" onclick="triggerToast('Opening document preview...', 'info')">
+              <i data-feather="eye" style="width: 13px; height: 13px;"></i> Preview
+            </button>
+            <button class="dropdown-item" onclick="startEditTableRow(this, 'documents')">
+              <i data-feather="edit-2" style="width: 13px; height: 13px;"></i> Edit Details
+            </button>
+            <button class="dropdown-item" onclick="triggerToast('Downloading document file...', 'info')">
+              <i data-feather="download" style="width: 13px; height: 13px;"></i> Download
+            </button>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item text-danger" onclick="deleteTableRow(this, 'documents')">
+              <i data-feather="trash-2" style="width: 13px; height: 13px;"></i> Delete
+            </button>
+          </div>
+        </div>
+      </td>
+    `;
+
+    tbody.insertBefore(tr, tbody.firstChild);
+    updateTableSectionCounts('documents');
+
+    // Highlight row
+    tr.style.animation = 'highlightFade 1.8s ease';
+  }
+
+  // Close modal
+  const backdrop = document.getElementById('document-modal-backdrop');
+  if (backdrop) {
+    backdrop.classList.remove('open');
+    setTimeout(() => { backdrop.style.display = 'none'; }, 200);
+  }
+
+  if (window.feather) feather.replace();
+  triggerToast(`Document "${name}" uploaded successfully!`, 'success');
+}
+
+// Timeline filter
+function filterTimeline(type, btn) {
+  const items = document.querySelectorAll('#activity-timeline-list .timeline-event-item');
+  const buttons = document.querySelectorAll('.timeline-filter-btn');
+  buttons.forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+
+  let visibleCount = 0;
+  items.forEach(item => {
+    const itemType = item.getAttribute('data-type');
+    if (type === 'all' || itemType === type) {
+      item.style.display = 'flex';
+      visibleCount++;
+    } else {
+      item.style.display = 'none';
+    }
+  });
+
+  const countEl = document.querySelector('#section-activity .card-title-count');
+  if (countEl) {
+    countEl.textContent = `(${visibleCount})`;
+  }
+}
+
+window.filterTimeline = filterTimeline;
+
+// Document modal exports
+window.openDocumentModal = openDocumentModal;
+window.closeDocumentModal = closeDocumentModal;
+window.handleDocFileSelect = handleDocFileSelect;
+window.saveDocumentModal = saveDocumentModal;
+
+// Table attachment file selector
+function handleTableAttachmentSelect(fileInput) {
+  if (fileInput.files && fileInput.files[0]) {
+    const file = fileInput.files[0];
+    const hiddenInput = fileInput.nextElementSibling;
+    const button = hiddenInput ? hiddenInput.nextElementSibling : null;
+    if (hiddenInput) hiddenInput.value = file.name;
+    if (button) {
+      button.innerHTML = `<i data-feather="paperclip" style="width: 12px; height: 12px; flex-shrink: 0;"></i> <span class="upload-btn-label" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${file.name}</span>`;
+      if (window.feather) feather.replace();
+    }
+    triggerToast(`File attached: ${file.name}`, 'info');
+  }
+}
+
+window.handleTableAttachmentSelect = handleTableAttachmentSelect;
+
 // Expose table inline editing methods
 window.startEditTableRow = startEditTableRow;
 window.addNewTableRow = addNewTableRow;
@@ -1754,5 +2175,6 @@ window.cancelEditTableRow = cancelEditTableRow;
 window.deleteTableRow = deleteTableRow;
 window.viewTableRowDetails = viewTableRowDetails;
 window.updateTableSectionCounts = updateTableSectionCounts;
+
 
 

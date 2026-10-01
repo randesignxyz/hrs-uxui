@@ -774,7 +774,8 @@
                   <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;">
                     <div class="info-field-group">
                       <span class="info-label">Khmer Name</span>
-                      <span class="info-val khmer-font highlight" style="font-size: 15px;" id="val-khmer-name">កូវ សេតពិសាល</span>
+                      <span class="info-val khmer-font highlight" style="font-size: 15px;" id="val-khmer-name">កូវ
+                        សេតពិសាល</span>
                     </div>
                     <div class="info-field-group">
                       <span class="info-label">Full Name (EN)</span>
@@ -821,8 +822,8 @@
                     <div class="form-group">
                       <label class="form-label" for="card-input-khmer-name">Khmer Full Name <span
                           class="required">*</span></label>
-                      <input type="text" class="form-input khmer-font" id="card-input-khmer-name"
-                        value="កូវ សេតពិសាល" placeholder="ឈ្មោះជាភាសាខ្មែរ">
+                      <input type="text" class="form-input khmer-font" id="card-input-khmer-name" value="កូវ សេតពិសាល"
+                        placeholder="ឈ្មោះជាភាសាខ្មែរ">
                     </div>
                     <div class="form-group">
                       <label class="form-label" for="card-input-en-name">English Full Name <span
@@ -883,7 +884,7 @@
 
               </div>
 
-              <!-- Address Information Card (Direct In-Card Edit) -->
+              <!-- Address Information Card -->
               <div class="card" id="card-address-info"
                 style="background: #f8fafc; border: 1px solid #e2e8f0; box-shadow: none;">
 
@@ -895,78 +896,46 @@
                       <i data-feather="map-pin" style="width: 15px; height: 15px; color: #64748b;"></i> Address
                       Information
                     </h3>
-                    <button class="section-edit-icon-btn" onclick="toggleCardEdit('address-info')"
-                      title="Edit Address Information" aria-label="Edit Address Information">
-                      <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
-                    </button>
                   </div>
 
-                  <div style="display: flex; flex-direction: column; gap: 14px;">
-                    <div class="info-field-group">
-                      <span class="info-label">Place of Birth</span>
-                      <span class="info-val" id="val-pob">Prek Preah Sdach, Battambang Province, Cambodia</span>
-                    </div>
-
-                    <div class="info-field-group">
-                      <span class="info-label">Permanent Address</span>
-                      <span class="info-val" id="val-perm-address">Building No. 888K, Sangkat Toul Sangke, 12105, Road
-                        598, Phnom Penh</span>
-                    </div>
-
-                    <div class="info-field-group">
-                      <span class="info-label">Current Address</span>
-                      <span class="info-val highlight" id="val-curr-address">Building No. 888K, Sangkat Toul Sangke,
-                        12105, Road 598, Phnom Penh</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- EDIT MODE -->
-                <div class="card-edit-mode">
-                  <div class="card-edit-header">
-                    <div class="card-edit-title">
-                      <i data-feather="edit-3" style="width: 15px; height: 15px; color: var(--brand-primary);"></i>
-                      <span>Edit Address Information</span>
-                    </div>
-                    <span class="card-edit-badge">In-Card Edit</span>
-                  </div>
-
-                  <div style="display: flex; flex-direction: column; gap: 10px;">
-                    <div class="form-group">
-                      <label class="form-label" for="card-input-pob">Place of Birth <span
-                          class="required">*</span></label>
-                      <input type="text" class="form-input" id="card-input-pob"
-                        value="Prek Preah Sdach, Battambang Province, Cambodia">
-                    </div>
-
-                    <div class="form-group">
-                      <label class="form-label" for="card-input-perm-address">Permanent Address <span
-                          class="required">*</span></label>
-                      <input type="text" class="form-input" id="card-input-perm-address"
-                        value="Building No. 888K, Sangkat Toul Sangke, 12105, Road 598, Phnom Penh">
-                    </div>
-
-                    <div class="form-group">
-                      <div
-                        style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px;">
-                        <label class="form-label" for="card-input-curr-address" style="margin-bottom: 0;">Current
-                          Residential Address <span class="required">*</span></label>
-                        <button type="button" class="btn-quick-helper" onclick="copyPermanentToCurrent()">
-                          <i data-feather="copy" style="width: 10px; height: 10px;"></i> Same as Permanent
-                        </button>
+                  <div style="display: flex; flex-direction: column; gap: 4px;">
+                    <!-- Place of Birth -->
+                    <div class="address-item-row">
+                      <div class="info-field-group" style="flex: 1;">
+                        <span class="info-label">Place of Birth</span>
+                        <span class="info-val" id="val-pob">Prek Preah Sdach, Battambang Province, Cambodia</span>
                       </div>
-                      <input type="text" class="form-input" id="card-input-curr-address"
-                        value="Building No. 888K, Sangkat Toul Sangke, 12105, Road 598, Phnom Penh">
+                      <button type="button" class="address-edit-btn" onclick="openAddressModal('pob')"
+                        title="Edit Place of Birth" aria-label="Edit Place of Birth">
+                        <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
+                      </button>
                     </div>
-                  </div>
 
-                  <div class="card-edit-footer">
-                    <button type="button" class="btn-card-cancel" onclick="cancelCardEdit('address-info')">
-                      <i data-feather="x" style="width: 12px; height: 12px;"></i> Cancel
-                    </button>
-                    <button type="button" class="btn-card-save" onclick="saveCardEdit('address-info')">
-                      <i data-feather="check" style="width: 12px; height: 12px;"></i> Save Changes
-                    </button>
+                    <!-- Permanent Address -->
+                    <div class="address-item-row">
+                      <div class="info-field-group" style="flex: 1;">
+                        <span class="info-label">Permanent Address</span>
+                        <span class="info-val" id="val-perm-address">Building No. 888K, Sangkat Toul Sangke, 12105, Road
+                          598, Phnom Penh</span>
+                      </div>
+                      <button type="button" class="address-edit-btn" onclick="openAddressModal('permanent')"
+                        title="Edit Permanent Address" aria-label="Edit Permanent Address">
+                        <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
+                      </button>
+                    </div>
+
+                    <!-- Current Address -->
+                    <div class="address-item-row">
+                      <div class="info-field-group" style="flex: 1;">
+                        <span class="info-label">Current Address</span>
+                        <span class="info-val highlight" id="val-curr-address">Building No. 888K, Sangkat Toul Sangke,
+                          12105, Road 598, Phnom Penh</span>
+                      </div>
+                      <button type="button" class="address-edit-btn" onclick="openAddressModal('current')"
+                        title="Edit Current Address" aria-label="Edit Current Address">
+                        <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
+                      </button>
+                    </div>
                   </div>
                 </div>
 
@@ -974,9 +943,9 @@
 
             </div>
 
-            <!-- Identity Documents & Passports Card (Direct In-Card Edit) -->
+            <!-- Identity Documents & Passports Card (Direct In-Card Edit - Hidden) -->
             <div class="card" id="card-identity-docs"
-              style="background: #f8fafc; border: 1px solid #e2e8f0; box-shadow: none; margin-top: var(--space-20);">
+              style="display: none; background: #f8fafc; border: 1px solid #e2e8f0; box-shadow: none; margin-top: var(--space-20);">
               <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
                 <h3
                   style="font-size: 14.5px; font-weight: 700; color: #0f172a; display: flex; align-items: center; gap: 6px; margin: 0;">
@@ -1008,7 +977,8 @@
                         </div>
                         <div class="info-field-group">
                           <span class="info-label">Expiry Date</span>
-                          <span class="info-val" style="color: #dc2626; font-weight: 600;" id="val-nid-expirydate">31 Jul 2026</span>
+                          <span class="info-val" style="color: #dc2626; font-weight: 600;" id="val-nid-expirydate">31
+                            Jul 2026</span>
                         </div>
                       </div>
                     </div>
@@ -1363,16 +1333,23 @@
                     <td>Employee</td>
                     <td>26 Apr 2007</td>
                     <td class="table-actions-cell" onclick="event.stopPropagation();">
-                      <button class="row-action-btn" title="View Details"
-                        onclick="triggerToast('Viewing details for Dara Sorins', 'info')">
-                        <i data-feather="eye" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Edit" onclick="startEditTableRow(this, 'family')">
-                        <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Delete" onclick="deleteTableRow(this, 'family')">
-                        <i data-feather="trash-2" style="width: 14px; height: 14px;"></i>
-                      </button>
+                      <div class="dropdown-wrapper">
+                        <button class="row-action-btn table-more-btn" title="More Actions" onclick="toggleDropdownMenu(this.parentElement)">
+                          <i data-feather="more-vertical" style="width: 15px; height: 15px;"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                          <button class="dropdown-item" onclick="viewTableRowDetails(this, 'family')">
+                            <i data-feather="eye" style="width: 13px; height: 13px;"></i> View Details
+                          </button>
+                          <button class="dropdown-item" onclick="startEditTableRow(this, 'family')">
+                            <i data-feather="edit-2" style="width: 13px; height: 13px;"></i> Edit
+                          </button>
+                          <div class="dropdown-divider"></div>
+                          <button class="dropdown-item danger" onclick="deleteTableRow(this, 'family')">
+                            <i data-feather="trash-2" style="width: 13px; height: 13px;"></i> Delete
+                          </button>
+                        </div>
+                      </div>
                     </td>
                   </tr>
 
@@ -1384,16 +1361,23 @@
                     <td>Employee</td>
                     <td>01 Jun 2000</td>
                     <td class="table-actions-cell" onclick="event.stopPropagation();">
-                      <button class="row-action-btn" title="View Details"
-                        onclick="triggerToast('Viewing details for Reach', 'info')">
-                        <i data-feather="eye" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Edit" onclick="startEditTableRow(this, 'family')">
-                        <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Delete" onclick="deleteTableRow(this, 'family')">
-                        <i data-feather="trash-2" style="width: 14px; height: 14px;"></i>
-                      </button>
+                      <div class="dropdown-wrapper">
+                        <button class="row-action-btn table-more-btn" title="More Actions" onclick="toggleDropdownMenu(this.parentElement)">
+                          <i data-feather="more-vertical" style="width: 15px; height: 15px;"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                          <button class="dropdown-item" onclick="viewTableRowDetails(this, 'family')">
+                            <i data-feather="eye" style="width: 13px; height: 13px;"></i> View Details
+                          </button>
+                          <button class="dropdown-item" onclick="startEditTableRow(this, 'family')">
+                            <i data-feather="edit-2" style="width: 13px; height: 13px;"></i> Edit
+                          </button>
+                          <div class="dropdown-divider"></div>
+                          <button class="dropdown-item danger" onclick="deleteTableRow(this, 'family')">
+                            <i data-feather="trash-2" style="width: 13px; height: 13px;"></i> Delete
+                          </button>
+                        </div>
+                      </div>
                     </td>
                   </tr>
                 </tbody>
@@ -1449,16 +1433,24 @@
                     <td>#89, Chbar Ampov, Kampong Cham</td>
                     <td><span class="badge badge-warning">Awaiting HR Review</span></td>
                     <td class="table-actions-cell" onclick="event.stopPropagation();">
-                      <button class="row-action-btn" title="View Details"
-                        onclick="triggerToast('Viewing details for Em', 'info')">
-                        <i data-feather="eye" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Edit" onclick="startEditTableRow(this, 'emergency')">
-                        <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Delete" onclick="deleteTableRow(this, 'emergency')">
-                        <i data-feather="trash-2" style="width: 14px; height: 14px;"></i>
-                      </button>
+                      <div class="dropdown-wrapper">
+                        <button class="row-action-btn table-more-btn" title="More Actions"
+                          onclick="toggleDropdownMenu(this.parentElement)">
+                          <i data-feather="more-vertical" style="width: 15px; height: 15px;"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                          <button class="dropdown-item" onclick="viewTableRowDetails(this, 'emergency')">
+                            <i data-feather="eye" style="width: 13px; height: 13px;"></i> View Details
+                          </button>
+                          <button class="dropdown-item" onclick="startEditTableRow(this, 'emergency')">
+                            <i data-feather="edit-2" style="width: 13px; height: 13px;"></i> Edit
+                          </button>
+                          <div class="dropdown-divider"></div>
+                          <button class="dropdown-item danger" onclick="deleteTableRow(this, 'emergency')">
+                            <i data-feather="trash-2" style="width: 13px; height: 13px;"></i> Delete
+                          </button>
+                        </div>
+                      </div>
                     </td>
                   </tr>
 
@@ -1476,16 +1468,24 @@
                     <td>#244, Toul Kork, Phnom Penh</td>
                     <td><span class="badge badge-success">Active</span></td>
                     <td class="table-actions-cell" onclick="event.stopPropagation();">
-                      <button class="row-action-btn" title="View Details"
-                        onclick="triggerToast('Viewing details for Sothea', 'info')">
-                        <i data-feather="eye" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Edit" onclick="startEditTableRow(this, 'emergency')">
-                        <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Delete" onclick="deleteTableRow(this, 'emergency')">
-                        <i data-feather="trash-2" style="width: 14px; height: 14px;"></i>
-                      </button>
+                      <div class="dropdown-wrapper">
+                        <button class="row-action-btn table-more-btn" title="More Actions"
+                          onclick="toggleDropdownMenu(this.parentElement)">
+                          <i data-feather="more-vertical" style="width: 15px; height: 15px;"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                          <button class="dropdown-item" onclick="viewTableRowDetails(this, 'emergency')">
+                            <i data-feather="eye" style="width: 13px; height: 13px;"></i> View Details
+                          </button>
+                          <button class="dropdown-item" onclick="startEditTableRow(this, 'emergency')">
+                            <i data-feather="edit-2" style="width: 13px; height: 13px;"></i> Edit
+                          </button>
+                          <div class="dropdown-divider"></div>
+                          <button class="dropdown-item danger" onclick="deleteTableRow(this, 'emergency')">
+                            <i data-feather="trash-2" style="width: 13px; height: 13px;"></i> Delete
+                          </button>
+                        </div>
+                      </div>
                     </td>
                   </tr>
                 </tbody>
@@ -1533,16 +1533,24 @@
                     <td><span class="badge badge-info" style="font-weight: 700;">3.7</span></td>
                     <td><span class="badge badge-success">Graduated</span></td>
                     <td class="table-actions-cell" onclick="event.stopPropagation();">
-                      <button class="row-action-btn" title="View Details"
-                        onclick="triggerToast('Viewing transcript & degree details', 'info')">
-                        <i data-feather="eye" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Edit" onclick="startEditTableRow(this, 'education')">
-                        <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Delete" onclick="deleteTableRow(this, 'education')">
-                        <i data-feather="trash-2" style="width: 14px; height: 14px;"></i>
-                      </button>
+                      <div class="dropdown-wrapper">
+                        <button class="row-action-btn table-more-btn" title="More Actions"
+                          onclick="toggleDropdownMenu(this.parentElement)">
+                          <i data-feather="more-vertical" style="width: 15px; height: 15px;"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                          <button class="dropdown-item" onclick="viewTableRowDetails(this, 'education')">
+                            <i data-feather="eye" style="width: 13px; height: 13px;"></i> View Details
+                          </button>
+                          <button class="dropdown-item" onclick="startEditTableRow(this, 'education')">
+                            <i data-feather="edit-2" style="width: 13px; height: 13px;"></i> Edit
+                          </button>
+                          <div class="dropdown-divider"></div>
+                          <button class="dropdown-item danger" onclick="deleteTableRow(this, 'education')">
+                            <i data-feather="trash-2" style="width: 13px; height: 13px;"></i> Delete
+                          </button>
+                        </div>
+                      </div>
                     </td>
                   </tr>
                 </tbody>
@@ -1589,16 +1597,24 @@
                     <td><span class="badge badge-success">Advanced (C1)</span></td>
                     <td class="col-desc">Professional working fluency</td>
                     <td class="table-actions-cell" onclick="event.stopPropagation();">
-                      <button class="row-action-btn" title="View Details"
-                        onclick="triggerToast('Viewing details for English proficiency', 'info')">
-                        <i data-feather="eye" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Edit" onclick="startEditTableRow(this, 'languages')">
-                        <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Delete" onclick="deleteTableRow(this, 'languages')">
-                        <i data-feather="trash-2" style="width: 14px; height: 14px;"></i>
-                      </button>
+                      <div class="dropdown-wrapper">
+                        <button class="row-action-btn table-more-btn" title="More Actions"
+                          onclick="toggleDropdownMenu(this.parentElement)">
+                          <i data-feather="more-vertical" style="width: 15px; height: 15px;"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                          <button class="dropdown-item" onclick="viewTableRowDetails(this, 'languages')">
+                            <i data-feather="eye" style="width: 13px; height: 13px;"></i> View Details
+                          </button>
+                          <button class="dropdown-item" onclick="startEditTableRow(this, 'languages')">
+                            <i data-feather="edit-2" style="width: 13px; height: 13px;"></i> Edit
+                          </button>
+                          <div class="dropdown-divider"></div>
+                          <button class="dropdown-item danger" onclick="deleteTableRow(this, 'languages')">
+                            <i data-feather="trash-2" style="width: 13px; height: 13px;"></i> Delete
+                          </button>
+                        </div>
+                      </div>
                     </td>
                   </tr>
 
@@ -1613,16 +1629,24 @@
                     <td><span class="badge badge-neutral">Beginner (A1)</span></td>
                     <td class="col-desc">Basic workplace conversational</td>
                     <td class="table-actions-cell" onclick="event.stopPropagation();">
-                      <button class="row-action-btn" title="View Details"
-                        onclick="triggerToast('Viewing details for Chinese proficiency', 'info')">
-                        <i data-feather="eye" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Edit" onclick="startEditTableRow(this, 'languages')">
-                        <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Delete" onclick="deleteTableRow(this, 'languages')">
-                        <i data-feather="trash-2" style="width: 14px; height: 14px;"></i>
-                      </button>
+                      <div class="dropdown-wrapper">
+                        <button class="row-action-btn table-more-btn" title="More Actions"
+                          onclick="toggleDropdownMenu(this.parentElement)">
+                          <i data-feather="more-vertical" style="width: 15px; height: 15px;"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                          <button class="dropdown-item" onclick="viewTableRowDetails(this, 'languages')">
+                            <i data-feather="eye" style="width: 13px; height: 13px;"></i> View Details
+                          </button>
+                          <button class="dropdown-item" onclick="startEditTableRow(this, 'languages')">
+                            <i data-feather="edit-2" style="width: 13px; height: 13px;"></i> Edit
+                          </button>
+                          <div class="dropdown-divider"></div>
+                          <button class="dropdown-item danger" onclick="deleteTableRow(this, 'languages')">
+                            <i data-feather="trash-2" style="width: 13px; height: 13px;"></i> Delete
+                          </button>
+                        </div>
+                      </div>
                     </td>
                   </tr>
                 </tbody>
@@ -1670,16 +1694,24 @@
                     <td><strong>50 Hours</strong></td>
                     <td class="col-desc">Info Security & ISO 27001</td>
                     <td class="table-actions-cell" onclick="event.stopPropagation();">
-                      <button class="row-action-btn" title="View Details"
-                        onclick="triggerToast('Viewing details for Hello EveryOne course', 'info')">
-                        <i data-feather="eye" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Edit" onclick="startEditTableRow(this, 'training-course')">
-                        <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Delete" onclick="deleteTableRow(this, 'training-course')">
-                        <i data-feather="trash-2" style="width: 14px; height: 14px;"></i>
-                      </button>
+                      <div class="dropdown-wrapper">
+                        <button class="row-action-btn table-more-btn" title="More Actions"
+                          onclick="toggleDropdownMenu(this.parentElement)">
+                          <i data-feather="more-vertical" style="width: 15px; height: 15px;"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                          <button class="dropdown-item" onclick="viewTableRowDetails(this, 'training-course')">
+                            <i data-feather="eye" style="width: 13px; height: 13px;"></i> View Details
+                          </button>
+                          <button class="dropdown-item" onclick="startEditTableRow(this, 'training-course')">
+                            <i data-feather="edit-2" style="width: 13px; height: 13px;"></i> Edit
+                          </button>
+                          <div class="dropdown-divider"></div>
+                          <button class="dropdown-item danger" onclick="deleteTableRow(this, 'training-course')">
+                            <i data-feather="trash-2" style="width: 13px; height: 13px;"></i> Delete
+                          </button>
+                        </div>
+                      </div>
                     </td>
                   </tr>
                 </tbody>
@@ -1705,6 +1737,7 @@
                     <th>Accrediting Institution</th>
                     <th>Issue Date</th>
                     <th class="col-desc">Description</th>
+                    <th>Attachment</th>
                     <th style="text-align: right;">Actions</th>
                   </tr>
                 </thead>
@@ -1716,17 +1749,31 @@
                     <td>FSS Global Credentials</td>
                     <td>Oct 2026</td>
                     <td class="col-desc">Cloud Architecture & DevOps Governance</td>
+                    <td>
+                      <a href="javascript:void(0)" class="doc-attachment-link"
+                        onclick="triggerToast('Opening aws_cloud_cert.pdf', 'info')">
+                        <i data-feather="paperclip" style="width: 12px; height: 12px;"></i> aws_cloud_cert.pdf
+                      </a>
+                    </td>
                     <td class="table-actions-cell" onclick="event.stopPropagation();">
-                      <button class="row-action-btn" title="View Details"
-                        onclick="triggerToast('Viewing details for Hello World certification', 'info')">
-                        <i data-feather="eye" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Edit" onclick="startEditTableRow(this, 'certification')">
-                        <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Delete" onclick="deleteTableRow(this, 'certification')">
-                        <i data-feather="trash-2" style="width: 14px; height: 14px;"></i>
-                      </button>
+                      <div class="dropdown-wrapper">
+                        <button class="row-action-btn table-more-btn" title="More Actions"
+                          onclick="toggleDropdownMenu(this.parentElement)">
+                          <i data-feather="more-vertical" style="width: 15px; height: 15px;"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                          <button class="dropdown-item" onclick="viewTableRowDetails(this, 'certification')">
+                            <i data-feather="eye" style="width: 13px; height: 13px;"></i> View Details
+                          </button>
+                          <button class="dropdown-item" onclick="startEditTableRow(this, 'certification')">
+                            <i data-feather="edit-2" style="width: 13px; height: 13px;"></i> Edit
+                          </button>
+                          <div class="dropdown-divider"></div>
+                          <button class="dropdown-item danger" onclick="deleteTableRow(this, 'certification')">
+                            <i data-feather="trash-2" style="width: 13px; height: 13px;"></i> Delete
+                          </button>
+                        </div>
+                      </div>
                     </td>
                   </tr>
                 </tbody>
@@ -1773,16 +1820,24 @@
                     <td class="col-period">01-Jul-2026 – 31-Jul-2026</td>
                     <td>Phnom Penh, Cambodia</td>
                     <td class="table-actions-cell" onclick="event.stopPropagation();">
-                      <button class="row-action-btn" title="View Details"
-                        onclick="triggerToast('Viewing details for UME Senior Specialist', 'info')">
-                        <i data-feather="eye" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Edit" onclick="startEditTableRow(this, 'experience')">
-                        <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Delete" onclick="deleteTableRow(this, 'experience')">
-                        <i data-feather="trash-2" style="width: 14px; height: 14px;"></i>
-                      </button>
+                      <div class="dropdown-wrapper">
+                        <button class="row-action-btn table-more-btn" title="More Actions"
+                          onclick="toggleDropdownMenu(this.parentElement)">
+                          <i data-feather="more-vertical" style="width: 15px; height: 15px;"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                          <button class="dropdown-item" onclick="viewTableRowDetails(this, 'experience')">
+                            <i data-feather="eye" style="width: 13px; height: 13px;"></i> View Details
+                          </button>
+                          <button class="dropdown-item" onclick="startEditTableRow(this, 'experience')">
+                            <i data-feather="edit-2" style="width: 13px; height: 13px;"></i> Edit
+                          </button>
+                          <div class="dropdown-divider"></div>
+                          <button class="dropdown-item danger" onclick="deleteTableRow(this, 'experience')">
+                            <i data-feather="trash-2" style="width: 13px; height: 13px;"></i> Delete
+                          </button>
+                        </div>
+                      </div>
                     </td>
                   </tr>
 
@@ -1796,16 +1851,24 @@
                     <td class="col-period">01-Jan-2024 – 30-Jun-2026</td>
                     <td>Phnom Penh, Cambodia</td>
                     <td class="table-actions-cell" onclick="event.stopPropagation();">
-                      <button class="row-action-btn" title="View Details"
-                        onclick="triggerToast('Viewing details for UME Support Associate', 'info')">
-                        <i data-feather="eye" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Edit" onclick="startEditTableRow(this, 'experience')">
-                        <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Delete" onclick="deleteTableRow(this, 'experience')">
-                        <i data-feather="trash-2" style="width: 14px; height: 14px;"></i>
-                      </button>
+                      <div class="dropdown-wrapper">
+                        <button class="row-action-btn table-more-btn" title="More Actions"
+                          onclick="toggleDropdownMenu(this.parentElement)">
+                          <i data-feather="more-vertical" style="width: 15px; height: 15px;"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                          <button class="dropdown-item" onclick="viewTableRowDetails(this, 'experience')">
+                            <i data-feather="eye" style="width: 13px; height: 13px;"></i> View Details
+                          </button>
+                          <button class="dropdown-item" onclick="startEditTableRow(this, 'experience')">
+                            <i data-feather="edit-2" style="width: 13px; height: 13px;"></i> Edit
+                          </button>
+                          <div class="dropdown-divider"></div>
+                          <button class="dropdown-item danger" onclick="deleteTableRow(this, 'experience')">
+                            <i data-feather="trash-2" style="width: 13px; height: 13px;"></i> Delete
+                          </button>
+                        </div>
+                      </div>
                     </td>
                   </tr>
                 </tbody>
@@ -1825,7 +1888,7 @@
                 <i data-feather="file-text" style="color: #B39900; width: 18px; height: 18px;"></i>
                 <h2 class="card-title">Documents <span class="card-title-count">(7)</span></h2>
               </div>
-              <button class="btn btn-sm btn-secondary" onclick="addNewTableRow('documents')">
+              <button class="btn btn-sm btn-secondary" onclick="openDocumentModal()">
                 <i data-feather="upload-cloud" style="width: 12px; height: 12px;"></i> Upload Document
               </button>
             </div>
@@ -1837,10 +1900,10 @@
                   <tr>
                     <th>Document Name</th>
                     <th>Category</th>
-                    <th>Uploaded Date</th>
+                    <th>Issued Date</th>
                     <th>Expiry Date</th>
                     <th>Status</th>
-                    <th>Uploaded By</th>
+                    <th>Attachment</th>
                     <th style="text-align: right;">Actions</th>
                   </tr>
                 </thead>
@@ -1854,18 +1917,34 @@
                     <td>01 Jul 2026</td>
                     <td><strong style="color: #ef4444;">31 Jul 2026</strong></td>
                     <td><span class="badge badge-danger">Expired</span></td>
-                    <td>Kauv Seth Pisal</td>
+                    <td>
+                      <a href="javascript:void(0)" class="doc-attachment-link"
+                        onclick="triggerToast('Opening national_id_copy.pdf', 'info')">
+                        <i data-feather="paperclip" style="width: 12px; height: 12px;"></i> national_id_copy.pdf
+                      </a>
+                    </td>
                     <td class="table-actions-cell" onclick="event.stopPropagation();">
-                      <button class="row-action-btn" title="Edit" onclick="startEditTableRow(this, 'documents')">
-                        <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Download"
-                        onclick="triggerToast('Downloading National ID...', 'info')">
-                        <i data-feather="download" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Delete" onclick="deleteTableRow(this, 'documents')">
-                        <i data-feather="trash-2" style="width: 14px; height: 14px;"></i>
-                      </button>
+                      <div class="dropdown-wrapper">
+                        <button class="row-action-btn table-more-btn" title="More Actions"
+                          onclick="toggleDropdownMenu(this.parentElement)">
+                          <i data-feather="more-vertical" style="width: 15px; height: 15px;"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                          <button class="dropdown-item" onclick="triggerToast('Opening document preview...', 'info')">
+                            <i data-feather="eye" style="width: 13px; height: 13px;"></i> Preview
+                          </button>
+                          <button class="dropdown-item" onclick="startEditTableRow(this, 'documents')">
+                            <i data-feather="edit-2" style="width: 13px; height: 13px;"></i> Edit Details
+                          </button>
+                          <button class="dropdown-item" onclick="triggerToast('Downloading National ID...', 'info')">
+                            <i data-feather="download" style="width: 13px; height: 13px;"></i> Download
+                          </button>
+                          <div class="dropdown-divider"></div>
+                          <button class="dropdown-item danger" onclick="deleteTableRow(this, 'documents')">
+                            <i data-feather="trash-2" style="width: 13px; height: 13px;"></i> Delete
+                          </button>
+                        </div>
+                      </div>
                     </td>
                   </tr>
 
@@ -1878,22 +1957,34 @@
                     <td>01 Jul 2026</td>
                     <td>27 Jul 2031</td>
                     <td><span class="badge badge-valid">Valid</span></td>
-                    <td>HR Admin</td>
+                    <td>
+                      <a href="javascript:void(0)" class="doc-attachment-link"
+                        onclick="triggerToast('Opening passport_scan.pdf', 'info')">
+                        <i data-feather="paperclip" style="width: 12px; height: 12px;"></i> passport_scan.pdf
+                      </a>
+                    </td>
                     <td class="table-actions-cell" onclick="event.stopPropagation();">
-                      <button class="row-action-btn" title="Preview"
-                        onclick="triggerToast('Opening document preview...', 'info')">
-                        <i data-feather="eye" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Edit" onclick="startEditTableRow(this, 'documents')">
-                        <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Download"
-                        onclick="triggerToast('Downloading Passport...', 'info')">
-                        <i data-feather="download" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Delete" onclick="deleteTableRow(this, 'documents')">
-                        <i data-feather="trash-2" style="width: 14px; height: 14px;"></i>
-                      </button>
+                      <div class="dropdown-wrapper">
+                        <button class="row-action-btn table-more-btn" title="More Actions"
+                          onclick="toggleDropdownMenu(this.parentElement)">
+                          <i data-feather="more-vertical" style="width: 15px; height: 15px;"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                          <button class="dropdown-item" onclick="triggerToast('Opening document preview...', 'info')">
+                            <i data-feather="eye" style="width: 13px; height: 13px;"></i> Preview
+                          </button>
+                          <button class="dropdown-item" onclick="startEditTableRow(this, 'documents')">
+                            <i data-feather="edit-2" style="width: 13px; height: 13px;"></i> Edit Details
+                          </button>
+                          <button class="dropdown-item" onclick="triggerToast('Downloading Passport...', 'info')">
+                            <i data-feather="download" style="width: 13px; height: 13px;"></i> Download
+                          </button>
+                          <div class="dropdown-divider"></div>
+                          <button class="dropdown-item danger" onclick="deleteTableRow(this, 'documents')">
+                            <i data-feather="trash-2" style="width: 13px; height: 13px;"></i> Delete
+                          </button>
+                        </div>
+                      </div>
                     </td>
                   </tr>
 
@@ -1906,22 +1997,34 @@
                     <td>01 Jul 2026</td>
                     <td>31 Jul 2031</td>
                     <td><span class="badge badge-valid">Valid</span></td>
-                    <td>Kauv Seth Pisal</td>
+                    <td>
+                      <a href="javascript:void(0)" class="doc-attachment-link"
+                        onclick="triggerToast('Opening drivers_license.pdf', 'info')">
+                        <i data-feather="paperclip" style="width: 12px; height: 12px;"></i> drivers_license.pdf
+                      </a>
+                    </td>
                     <td class="table-actions-cell" onclick="event.stopPropagation();">
-                      <button class="row-action-btn" title="Preview"
-                        onclick="triggerToast('Opening document preview...', 'info')">
-                        <i data-feather="eye" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Edit" onclick="startEditTableRow(this, 'documents')">
-                        <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Download"
-                        onclick="triggerToast('Downloading Driver License...', 'info')">
-                        <i data-feather="download" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Delete" onclick="deleteTableRow(this, 'documents')">
-                        <i data-feather="trash-2" style="width: 14px; height: 14px;"></i>
-                      </button>
+                      <div class="dropdown-wrapper">
+                        <button class="row-action-btn table-more-btn" title="More Actions"
+                          onclick="toggleDropdownMenu(this.parentElement)">
+                          <i data-feather="more-vertical" style="width: 15px; height: 15px;"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                          <button class="dropdown-item" onclick="triggerToast('Opening document preview...', 'info')">
+                            <i data-feather="eye" style="width: 13px; height: 13px;"></i> Preview
+                          </button>
+                          <button class="dropdown-item" onclick="startEditTableRow(this, 'documents')">
+                            <i data-feather="edit-2" style="width: 13px; height: 13px;"></i> Edit Details
+                          </button>
+                          <button class="dropdown-item" onclick="triggerToast('Downloading Driver License...', 'info')">
+                            <i data-feather="download" style="width: 13px; height: 13px;"></i> Download
+                          </button>
+                          <div class="dropdown-divider"></div>
+                          <button class="dropdown-item danger" onclick="deleteTableRow(this, 'documents')">
+                            <i data-feather="trash-2" style="width: 13px; height: 13px;"></i> Delete
+                          </button>
+                        </div>
+                      </div>
                     </td>
                   </tr>
 
@@ -1934,22 +2037,34 @@
                     <td>30 Nov 2015</td>
                     <td>Indefinite</td>
                     <td><span class="badge badge-valid">Valid</span></td>
-                    <td>HR Legal</td>
+                    <td>
+                      <a href="javascript:void(0)" class="doc-attachment-link"
+                        onclick="triggerToast('Opening contract_signed.pdf', 'info')">
+                        <i data-feather="paperclip" style="width: 12px; height: 12px;"></i> contract_signed.pdf
+                      </a>
+                    </td>
                     <td class="table-actions-cell" onclick="event.stopPropagation();">
-                      <button class="row-action-btn" title="Preview"
-                        onclick="triggerToast('Opening document preview...', 'info')">
-                        <i data-feather="eye" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Edit" onclick="startEditTableRow(this, 'documents')">
-                        <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Download"
-                        onclick="triggerToast('Downloading Contract...', 'info')">
-                        <i data-feather="download" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Delete" onclick="deleteTableRow(this, 'documents')">
-                        <i data-feather="trash-2" style="width: 14px; height: 14px;"></i>
-                      </button>
+                      <div class="dropdown-wrapper">
+                        <button class="row-action-btn table-more-btn" title="More Actions"
+                          onclick="toggleDropdownMenu(this.parentElement)">
+                          <i data-feather="more-vertical" style="width: 15px; height: 15px;"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                          <button class="dropdown-item" onclick="triggerToast('Opening document preview...', 'info')">
+                            <i data-feather="eye" style="width: 13px; height: 13px;"></i> Preview
+                          </button>
+                          <button class="dropdown-item" onclick="startEditTableRow(this, 'documents')">
+                            <i data-feather="edit-2" style="width: 13px; height: 13px;"></i> Edit Details
+                          </button>
+                          <button class="dropdown-item" onclick="triggerToast('Downloading Contract...', 'info')">
+                            <i data-feather="download" style="width: 13px; height: 13px;"></i> Download
+                          </button>
+                          <div class="dropdown-divider"></div>
+                          <button class="dropdown-item danger" onclick="deleteTableRow(this, 'documents')">
+                            <i data-feather="trash-2" style="width: 13px; height: 13px;"></i> Delete
+                          </button>
+                        </div>
+                      </div>
                     </td>
                   </tr>
 
@@ -1959,25 +2074,37 @@
                       <div class="table-cell-title">RUPP Bachelor Degree Certificate & Transcript</div>
                     </td>
                     <td><span class="badge badge-neutral">Education</span></td>
-                    <td>15 Jan 2026</td>
+                    <td>15 Jan 2015</td>
                     <td>Permanent</td>
                     <td><span class="badge badge-valid">Valid</span></td>
-                    <td>Kauv Seth Pisal</td>
+                    <td>
+                      <a href="javascript:void(0)" class="doc-attachment-link"
+                        onclick="triggerToast('Opening degree_certificate.pdf', 'info')">
+                        <i data-feather="paperclip" style="width: 12px; height: 12px;"></i> degree_certificate.pdf
+                      </a>
+                    </td>
                     <td class="table-actions-cell" onclick="event.stopPropagation();">
-                      <button class="row-action-btn" title="Preview"
-                        onclick="triggerToast('Opening document preview...', 'info')">
-                        <i data-feather="eye" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Edit" onclick="startEditTableRow(this, 'documents')">
-                        <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Download"
-                        onclick="triggerToast('Downloading Degree...', 'info')">
-                        <i data-feather="download" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Delete" onclick="deleteTableRow(this, 'documents')">
-                        <i data-feather="trash-2" style="width: 14px; height: 14px;"></i>
-                      </button>
+                      <div class="dropdown-wrapper">
+                        <button class="row-action-btn table-more-btn" title="More Actions"
+                          onclick="toggleDropdownMenu(this.parentElement)">
+                          <i data-feather="more-vertical" style="width: 15px; height: 15px;"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                          <button class="dropdown-item" onclick="triggerToast('Opening document preview...', 'info')">
+                            <i data-feather="eye" style="width: 13px; height: 13px;"></i> Preview
+                          </button>
+                          <button class="dropdown-item" onclick="startEditTableRow(this, 'documents')">
+                            <i data-feather="edit-2" style="width: 13px; height: 13px;"></i> Edit Details
+                          </button>
+                          <button class="dropdown-item" onclick="triggerToast('Downloading Degree...', 'info')">
+                            <i data-feather="download" style="width: 13px; height: 13px;"></i> Download
+                          </button>
+                          <div class="dropdown-divider"></div>
+                          <button class="dropdown-item danger" onclick="deleteTableRow(this, 'documents')">
+                            <i data-feather="trash-2" style="width: 13px; height: 13px;"></i> Delete
+                          </button>
+                        </div>
+                      </div>
                     </td>
                   </tr>
 
@@ -1990,22 +2117,34 @@
                     <td>10 Oct 2025</td>
                     <td><strong style="color: #B39900;">10 Oct 2026</strong></td>
                     <td><span class="badge badge-warning">Expiring Soon</span></td>
-                    <td>Kauv Seth Pisal</td>
+                    <td>
+                      <a href="javascript:void(0)" class="doc-attachment-link"
+                        onclick="triggerToast('Opening itil_v4_cert.pdf', 'info')">
+                        <i data-feather="paperclip" style="width: 12px; height: 12px;"></i> itil_v4_cert.pdf
+                      </a>
+                    </td>
                     <td class="table-actions-cell" onclick="event.stopPropagation();">
-                      <button class="row-action-btn" title="Preview"
-                        onclick="triggerToast('Opening document preview...', 'info')">
-                        <i data-feather="eye" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Edit" onclick="startEditTableRow(this, 'documents')">
-                        <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Download"
-                        onclick="triggerToast('Downloading Certificate...', 'info')">
-                        <i data-feather="download" style="width: 14px; height: 14px;"></i>
-                      </button>
-                      <button class="row-action-btn" title="Delete" onclick="deleteTableRow(this, 'documents')">
-                        <i data-feather="trash-2" style="width: 14px; height: 14px;"></i>
-                      </button>
+                      <div class="dropdown-wrapper">
+                        <button class="row-action-btn table-more-btn" title="More Actions"
+                          onclick="toggleDropdownMenu(this.parentElement)">
+                          <i data-feather="more-vertical" style="width: 15px; height: 15px;"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                          <button class="dropdown-item" onclick="triggerToast('Opening document preview...', 'info')">
+                            <i data-feather="eye" style="width: 13px; height: 13px;"></i> Preview
+                          </button>
+                          <button class="dropdown-item" onclick="startEditTableRow(this, 'documents')">
+                            <i data-feather="edit-2" style="width: 13px; height: 13px;"></i> Edit Details
+                          </button>
+                          <button class="dropdown-item" onclick="triggerToast('Downloading Certificate...', 'info')">
+                            <i data-feather="download" style="width: 13px; height: 13px;"></i> Download
+                          </button>
+                          <div class="dropdown-divider"></div>
+                          <button class="dropdown-item danger" onclick="deleteTableRow(this, 'documents')">
+                            <i data-feather="trash-2" style="width: 13px; height: 13px;"></i> Delete
+                          </button>
+                        </div>
+                      </div>
                     </td>
                   </tr>
 
@@ -2018,9 +2157,27 @@
                     <td>—</td>
                     <td>Due 30 Sep 2026</td>
                     <td><span class="badge badge-draft">Missing</span></td>
-                    <td>—</td>
+                    <td><span style="color: #94a3b8; font-size: 13px;">—</span></td>
                     <td class="table-actions-cell" onclick="event.stopPropagation();">
-                      <button class="btn btn-sm btn-primary" onclick="startEditTableRow(this, 'documents')">Upload Now</button>
+                      <div class="dropdown-wrapper">
+                        <button class="row-action-btn table-more-btn" title="More Actions"
+                          onclick="toggleDropdownMenu(this.parentElement)">
+                          <i data-feather="more-vertical" style="width: 15px; height: 15px;"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                          <button class="dropdown-item" onclick="startEditTableRow(this, 'documents')">
+                            <i data-feather="upload-cloud" style="width: 13px; height: 13px;"></i> Upload Now
+                          </button>
+                          <button class="dropdown-item"
+                            onclick="triggerToast('Viewing checkup requirements...', 'info')">
+                            <i data-feather="file-text" style="width: 13px; height: 13px;"></i> View Requirements
+                          </button>
+                          <div class="dropdown-divider"></div>
+                          <button class="dropdown-item danger" onclick="deleteTableRow(this, 'documents')">
+                            <i data-feather="trash-2" style="width: 13px; height: 13px;"></i> Delete
+                          </button>
+                        </div>
+                      </div>
                     </td>
                   </tr>
                 </tbody>
@@ -2035,19 +2192,27 @@
              ================================================================== -->
         <div class="section-panel" id="section-activity">
           <div class="card">
-            <div class="card-header-bar">
+            <div class="card-header-bar" style="margin-bottom: var(--space-16);">
               <div class="card-title-group">
                 <i data-feather="clock" style="color: #B39900; width: 18px; height: 18px;"></i>
-                <h2 class="card-title">Profile Audit & Activity Timeline</h2>
+                <h2 class="card-title">Activity Timeline <span class="card-title-count">(4)</span></h2>
               </div>
-              <span class="badge badge-neutral">Immutable Audit Trail</span>
+              <div class="timeline-filter-group">
+                <button class="timeline-filter-btn active" onclick="filterTimeline('all', this)">All</button>
+                <button class="timeline-filter-btn" onclick="filterTimeline('edit', this)">Edits</button>
+                <button class="timeline-filter-btn" onclick="filterTimeline('document', this)">Documents</button>
+                <button class="timeline-filter-btn" onclick="filterTimeline('training', this)">Training</button>
+              </div>
             </div>
 
-            <div class="activity-timeline">
-              <!-- Event 1 -->
-              <div class="timeline-event-item">
-                <div class="timeline-node-dot">
-                  <i data-feather="edit-3" style="width: 11px; height: 11px;"></i>
+            <div class="activity-timeline" id="activity-timeline-list">
+              <!-- Event 1: Profile Edit -->
+              <div class="timeline-event-item" data-type="edit">
+                <div class="timeline-left-track">
+                  <div class="timeline-node-icon node-amber" title="Profile Modification">
+                    <i data-feather="edit-3" style="width: 14px; height: 14px;"></i>
+                  </div>
+                  <div class="timeline-spine-line"></div>
                 </div>
                 <div class="timeline-event-body">
                   <div class="timeline-header-row">
@@ -2058,18 +2223,25 @@
                     Updated Current Residential Address to <em>"Building No. 888K, Sangkat Toul Sangke, 12105, Road 598,
                       Phnom Penh"</em> and verified business contact phone number.
                   </div>
-                  <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 4px;">
-                    <span class="timeline-tag">Action by: Admin Admin (HR Admin)</span>
-                    <button class="btn btn-sm btn-secondary"
-                      onclick="triggerToast('Viewing change diff for revision #REV-884', 'info')">View Diff</button>
+                  <div class="timeline-footer-row">
+                    <span class="timeline-actor-badge">
+                      <i data-feather="user-check" style="width: 12px; height: 12px;"></i> Admin Admin (HR Admin)
+                    </span>
+                    <button class="btn btn-xs btn-secondary"
+                      onclick="triggerToast('Viewing change diff for revision #REV-884', 'info')">
+                      <i data-feather="git-commit" style="width: 11px; height: 11px;"></i> View Diff
+                    </button>
                   </div>
                 </div>
               </div>
 
-              <!-- Event 2 -->
-              <div class="timeline-event-item">
-                <div class="timeline-node-dot">
-                  <i data-feather="file-text" style="width: 11px; height: 11px;"></i>
+              <!-- Event 2: Document Upload -->
+              <div class="timeline-event-item" data-type="document">
+                <div class="timeline-left-track">
+                  <div class="timeline-node-icon node-blue" title="Document Upload">
+                    <i data-feather="file-text" style="width: 14px; height: 14px;"></i>
+                  </div>
+                  <div class="timeline-spine-line"></div>
                 </div>
                 <div class="timeline-event-body">
                   <div class="timeline-header-row">
@@ -2077,35 +2249,54 @@
                     <span class="timeline-timestamp">20 Sep 2026 · 03:15 PM</span>
                   </div>
                   <div class="timeline-desc">
-                    Uploaded file <code>passport_scan_renewal.pdf</code> for credential verification. Status flagged as
-                    expired on 27 Jul 2026.
+                    Uploaded file <code>passport_scan_renewal.pdf</code> for credential verification. Expiry flagged for
+                    27 Jul 2026.
                   </div>
-                  <span class="timeline-tag">Action by: HR User</span>
+                  <div class="timeline-footer-row">
+                    <span class="timeline-actor-badge">
+                      <i data-feather="user" style="width: 12px; height: 12px;"></i> HR User
+                    </span>
+                    <button class="btn btn-xs btn-secondary"
+                      onclick="triggerToast('Opening passport_scan_renewal.pdf preview', 'info')">
+                      <i data-feather="eye" style="width: 11px; height: 11px;"></i> Preview
+                    </button>
+                  </div>
                 </div>
               </div>
 
-              <!-- Event 3 -->
-              <div class="timeline-event-item">
-                <div class="timeline-node-dot">
-                  <i data-feather="user-plus" style="width: 11px; height: 11px;"></i>
+              <!-- Event 3: Contact Created -->
+              <div class="timeline-event-item" data-type="edit">
+                <div class="timeline-left-track">
+                  <div class="timeline-node-icon node-emerald" title="Contact Updated">
+                    <i data-feather="user-plus" style="width: 14px; height: 14px;"></i>
+                  </div>
+                  <div class="timeline-spine-line"></div>
                 </div>
                 <div class="timeline-event-body">
                   <div class="timeline-header-row">
-                    <span class="timeline-actor-title">Emergency Contact Draft Added</span>
+                    <span class="timeline-actor-title">Emergency Contact Added</span>
                     <span class="timeline-timestamp">15 Sep 2026 · 11:04 AM</span>
                   </div>
                   <div class="timeline-desc">
                     Submitted new draft emergency contact <strong>Em (Cousin)</strong> with phone
                     <code>012356988</code>.
                   </div>
-                  <span class="timeline-tag">Action by: Kauv Seth Pisal (Self-service Portal)</span>
+                  <div class="timeline-footer-row">
+                    <span class="timeline-actor-badge">
+                      <i data-feather="user" style="width: 12px; height: 12px;"></i> Kauv Seth Pisal (Self-service
+                      Portal)
+                    </span>
+                  </div>
                 </div>
               </div>
 
-              <!-- Event 4 -->
-              <div class="timeline-event-item">
-                <div class="timeline-node-dot">
-                  <i data-feather="award" style="width: 11px; height: 11px;"></i>
+              <!-- Event 4: Training & Certification -->
+              <div class="timeline-event-item" data-type="training">
+                <div class="timeline-left-track">
+                  <div class="timeline-node-icon node-purple" title="Accreditation Completed">
+                    <i data-feather="award" style="width: 14px; height: 14px;"></i>
+                  </div>
+                  <div class="timeline-spine-line"></div>
                 </div>
                 <div class="timeline-event-body">
                   <div class="timeline-header-row">
@@ -2115,7 +2306,11 @@
                   <div class="timeline-desc">
                     Completed 50-hour corporate cybersecurity and data protection accreditation through HRS Academy.
                   </div>
-                  <span class="timeline-tag">Action by: HR Learning & Development</span>
+                  <div class="timeline-footer-row">
+                    <span class="timeline-actor-badge">
+                      <i data-feather="shield" style="width: 12px; height: 12px;"></i> HR Learning & Development
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2173,6 +2368,160 @@
       </button>
     </div>
   </aside>
+
+  <!-- ========================================================================
+       ADDRESS EDIT MODAL (Targeted Modal for Individual Addresses)
+       ======================================================================== -->
+  <div class="modal-backdrop" id="address-modal-backdrop" onclick="closeAddressModal(event)" style="display: none;">
+    <div class="modal-container" id="address-modal" role="dialog" aria-modal="true"
+      aria-labelledby="address-modal-title" onclick="event.stopPropagation();">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="modal-icon-badge">
+            <i data-feather="map-pin" style="width: 18px; height: 18px; color: var(--brand-primary);"></i>
+          </div>
+          <div>
+            <h3 class="modal-title" id="address-modal-title">Edit Address</h3>
+            <p class="modal-subtitle" id="address-modal-subtitle">Update employee address details</p>
+          </div>
+        </div>
+        <button type="button" class="modal-close-btn" onclick="closeAddressModal(event)" aria-label="Close modal">
+          <i data-feather="x" style="width: 18px; height: 18px;"></i>
+        </button>
+      </div>
+
+      <form id="address-modal-form" onsubmit="saveAddressModal(event)">
+        <div class="modal-body" id="address-modal-body">
+          <!-- Dynamically populated based on clicked address -->
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeAddressModal(event)">
+            <i data-feather="x" style="width: 13px; height: 13px;"></i> Cancel
+          </button>
+          <button type="submit" class="btn btn-primary">
+            <i data-feather="check" style="width: 13px; height: 13px;"></i> Save Address
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       DOCUMENT UPLOAD MODAL
+       ======================================================================== -->
+  <div class="modal-backdrop" id="document-modal-backdrop" onclick="closeDocumentModal(event)" style="display: none;">
+    <div class="modal-container" id="document-modal" style="max-width: 680px;" role="dialog" aria-modal="true"
+      aria-labelledby="doc-modal-title" onclick="event.stopPropagation();">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="modal-icon-badge">
+            <i data-feather="upload-cloud" style="width: 18px; height: 18px; color: var(--brand-primary);"></i>
+          </div>
+          <div>
+            <h3 class="modal-title" id="doc-modal-title">Upload Document</h3>
+            <p class="modal-subtitle">Attach employee verification documents or credentials</p>
+          </div>
+        </div>
+        <button type="button" class="modal-close-btn" onclick="closeDocumentModal(event)" aria-label="Close modal">
+          <i data-feather="x" style="width: 18px; height: 18px;"></i>
+        </button>
+      </div>
+
+      <form id="document-modal-form" onsubmit="saveDocumentModal(event)">
+        <div class="modal-body" style="gap: 16px;">
+          <div class="grid-2-col" style="gap: 16px; align-items: start;">
+            <!-- Column 1: Document Details -->
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+              <div class="form-group">
+                <label class="form-label" for="doc-modal-name">Document Name <span class="required">*</span></label>
+                <input type="text" class="form-input" id="doc-modal-name" required
+                  placeholder="e.g. Passport Copy, Degree Certificate, Work Contract">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="doc-modal-category">Category <span class="required">*</span></label>
+                <select class="form-select" id="doc-modal-category" required>
+                  <option value="Identity">Identity</option>
+                  <option value="Employment">Employment</option>
+                  <option value="Certification">Certification</option>
+                  <option value="Financial">Financial</option>
+                  <option value="Legal">Legal</option>
+                  <option value="Education">Education</option>
+                  <option value="Health">Health</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="doc-modal-issued-date">Issued Date</label>
+                <input type="text" class="form-input" id="doc-modal-issued-date" placeholder="DD MMM YYYY"
+                  value="01 Jul 2026">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="doc-modal-notes">Notes / Remarks <span
+                    style="font-size: 11.5px; color: #94a3b8; font-weight: normal;">(Optional)</span></label>
+                <input type="text" class="form-input" id="doc-modal-notes"
+                  placeholder="e.g. Verified original physical document on 01 Jul 2026">
+              </div>
+            </div>
+
+            <!-- Column 2: Status, Expiry & Attachment -->
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+              <div class="form-group">
+                <label class="form-label" for="doc-modal-status">Status <span class="required">*</span></label>
+                <select class="form-select" id="doc-modal-status" required>
+                  <option value="Valid" selected>Valid</option>
+                  <option value="Expiring Soon">Expiring Soon</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Expired">Expired</option>
+                  <option value="Missing">Missing</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="doc-modal-expiry-date">Expiry Date</label>
+                <input type="text" class="form-input" id="doc-modal-expiry-date" placeholder="DD MMM YYYY or Never"
+                  value="31 Jul 2030">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Attachment File <span class="required">*</span></label>
+                <div class="file-dropzone" id="doc-file-dropzone"
+                  onclick="document.getElementById('doc-modal-file-input').click()"
+                  style="padding: 16px 12px; min-height: 124px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                  <input type="file" id="doc-modal-file-input" style="display: none;"
+                    onchange="handleDocFileSelect(this)">
+                  <i data-feather="upload-cloud" class="dropzone-icon"
+                    style="width: 26px; height: 26px; margin: 0 auto 6px auto; display: block;"></i>
+                  <div class="dropzone-text" id="doc-dropzone-title" style="font-size: 12.5px;">Click to browse or drop
+                    file</div>
+                  <div class="dropzone-sub" id="doc-dropzone-subtitle" style="font-size: 11px;">PDF, PNG, JPG, DOCX (Max
+                    10MB)</div>
+                  <div id="doc-file-selected-badge"
+                    style="display: none; margin-top: 8px; align-items: center; justify-content: center; gap: 6px; font-weight: 600; color: var(--brand-primary); font-size: 12px;">
+                    <i data-feather="paperclip" style="width: 13px; height: 13px;"></i>
+                    <span id="doc-selected-filename">document.pdf</span>
+                    <span style="font-size: 10.5px; color: #64748b;" id="doc-selected-filesize">(245 KB)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeDocumentModal(event)">
+            <i data-feather="x" style="width: 13px; height: 13px;"></i> Cancel
+          </button>
+          <button type="submit" class="btn btn-primary">
+            <i data-feather="upload-cloud" style="width: 13px; height: 13px;"></i> Upload & Attach
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <!-- ========================================================================
        TOAST CONTAINER
