@@ -4,7 +4,7 @@
 
 :root {
   /* Colors: Neutrals */
-  --bg-page: #f8fafc;
+  --bg-page: #f5f5f5;
   --bg-surface: #ffffff;
   --bg-surface-subtle: #f1f5f9;
   --bg-surface-hover: #f8fafc;
@@ -311,10 +311,10 @@ body {
    2. APP CONTAINER & EMPLOYEE HEADER
    -------------------------------------------------------------------------- */
 .app-container {
-  max-width: 1440px;
+  max-width: 100%;
   width: 100%;
   margin: 0 auto;
-  padding: var(--space-20) var(--space-24) var(--space-40);
+  padding: 20px 44px 44px;
   display: flex;
   flex-direction: column;
   gap: var(--space-20);
@@ -2296,9 +2296,9 @@ body.single-tab-mode .section-panel.active {
   background: #f8fafc;
   color: var(--text-muted);
   font-weight: 600;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
+  font-size: 12.5px;
+  text-transform: none;
+  letter-spacing: normal;
   border-bottom: 1px solid var(--border-light);
   white-space: nowrap;
 }
@@ -2332,12 +2332,24 @@ body.single-tab-mode .section-panel.active {
   text-align: right;
   white-space: nowrap;
   position: relative;
+  vertical-align: middle;
 }
 
 .table-actions-cell .dropdown-wrapper {
   position: relative;
   display: inline-block;
+  vertical-align: middle;
   text-align: left;
+}
+
+.table-actions-cell .row-action-btn {
+  vertical-align: middle;
+}
+
+.table-actions-cell .row-action-btn + .dropdown-wrapper,
+.table-actions-cell .dropdown-wrapper + .row-action-btn,
+.table-actions-cell .row-action-btn + .row-action-btn {
+  margin-left: 4px;
 }
 
 .table-actions-cell .dropdown-menu {
@@ -2427,12 +2439,17 @@ body.single-tab-mode .section-panel.active {
   transform: translateY(-1px);
 }
 
+.row-action-btn:hover i,
+.row-action-btn:hover svg {
+  color: var(--brand-primary);
+}
+
 /* Table Column Width & Wrapping Controls */
 .doc-attachment-link {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  color: #0f172a;
+  color: #334155;
   font-size: 12.5px;
   font-weight: 500;
   text-decoration: none;
@@ -2440,26 +2457,14 @@ body.single-tab-mode .section-panel.active {
   border-radius: 4px;
   background: #f1f5f9;
   border: 1px solid #e2e8f0;
-  transition: all var(--transition-fast);
   white-space: nowrap;
-}
-
-.doc-attachment-link:hover {
-  background: var(--brand-light, #fefce8);
-  border-color: var(--brand-border, #fef08a);
-  color: var(--brand-primary, #B39900);
-  transform: translateY(-1px);
+  cursor: default;
+  user-select: text;
 }
 
 .doc-attachment-link i,
 .doc-attachment-link svg {
   color: #64748b;
-  transition: color var(--transition-fast);
-}
-
-.doc-attachment-link:hover i,
-.doc-attachment-link:hover svg {
-  color: var(--brand-primary, #B39900);
 }
 
 .col-period,
@@ -3037,8 +3042,7 @@ body.is-edit-mode .floating-edit-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 10px;
-  border-bottom: 1px dashed var(--brand-border);
+  padding-bottom: 4px;
   margin-bottom: 2px;
 }
 
@@ -3066,8 +3070,7 @@ body.is-edit-mode .floating-edit-bar {
   align-items: center;
   justify-content: flex-end;
   gap: 8px;
-  padding-top: 12px;
-  border-top: 1px solid var(--border-light);
+  padding-top: 8px;
   margin-top: 4px;
 }
 
@@ -3763,4 +3766,523 @@ body.is-edit-mode .floating-edit-bar {
   border-color: var(--brand-border);
   color: var(--brand-primary);
   transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   National ID Card Dual-Side Attachment & Image Lightbox Modal
+   ========================================================================== */
+.id-card-scan-container {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.id-card-scan-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.id-card-scan-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.id-card-scan-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+@media (max-width: 640px) {
+  .id-card-scan-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.id-card-preview-box {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.id-card-preview-box:hover {
+  transform: translateY(-2px);
+  border-color: var(--brand-primary);
+  box-shadow: 0 4px 12px rgba(179, 153, 0, 0.15);
+}
+
+.id-card-preview-box-header {
+  padding: 8px 12px;
+  background: #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.id-card-preview-img-wrap {
+  padding: 10px;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  min-height: 150px;
+}
+
+.id-card-preview-img {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+  border-radius: 6px;
+  transition: transform 0.25s ease;
+}
+
+.id-card-preview-img-wrap:hover .id-card-preview-img {
+  transform: scale(1.02);
+}
+
+.id-card-zoom-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+
+.id-card-preview-img-wrap:hover .id-card-zoom-overlay {
+  opacity: 1;
+}
+
+/* Image Lightbox */
+.lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(4px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.lightbox-image {
+  max-width: 100%;
+  max-height: 78vh;
+  border-radius: var(--radius-md);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  object-fit: contain;
+  background: #ffffff;
+}
+
+.lightbox-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #ffffff;
+}
+
+.lightbox-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+.lightbox-close-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.lightbox-close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ==========================================================================
+   Interactive PDF Document Sheet Viewer & Canvas
+   ========================================================================== */
+.pdf-viewer-container {
+  background: #334155;
+  border: 1px solid #1e293b;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+}
+
+.pdf-viewer-toolbar {
+  background: #0f172a;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #f8fafc;
+  font-size: 12px;
+  border-bottom: 1px solid #1e293b;
+  user-select: none;
+}
+
+.pdf-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pdf-toolbar-badge {
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.pdf-toolbar-filename {
+  font-weight: 600;
+  color: #f1f5f9;
+  font-size: 12.5px;
+}
+
+.pdf-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pdf-toolbar-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #f8fafc;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11.5px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.pdf-toolbar-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+}
+
+.pdf-viewport-stage {
+  padding: 20px;
+  background: #475569;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.pdf-viewport-stage::-webkit-scrollbar {
+  width: 6px;
+}
+
+.pdf-viewport-stage::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 3px;
+}
+
+.pdf-sheet-page {
+  background: #ffffff;
+  width: 100%;
+  max-width: 520px;
+  min-height: 420px;
+  padding: 28px 32px;
+  border-radius: 2px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #0f172a;
+  position: relative;
+  overflow: hidden;
+}
+
+.pdf-sheet-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-30deg);
+  font-size: 42px;
+  font-weight: 900;
+  color: rgba(179, 153, 0, 0.05);
+  pointer-events: none;
+  white-space: nowrap;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.pdf-sheet-header {
+  border-bottom: 2px solid #0f172a;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pdf-sheet-org {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #475569;
+}
+
+.pdf-sheet-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-top: 2px;
+}
+
+.pdf-sheet-seal {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px dashed #B39900;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  font-weight: 700;
+  color: #B39900;
+  text-align: center;
+  line-height: 1.1;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.pdf-sheet-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #334155;
+}
+
+.pdf-sheet-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 6px 0;
+  font-size: 11.5px;
+}
+
+.pdf-sheet-table td {
+  padding: 5px 8px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.pdf-sheet-table td.label-cell {
+  font-weight: 600;
+  color: #64748b;
+  width: 35%;
+  background: #fafafa;
+}
+
+.pdf-sheet-table td.val-cell {
+  color: #0f172a;
+  font-weight: 500;
+}
+
+.pdf-sheet-footer {
+  margin-top: 20px;
+  padding-top: 12px;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.pdf-sheet-signature-box {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.pdf-sheet-signature-line {
+  font-family: 'Brush Script MT', cursive, serif;
+  font-size: 20px;
+  color: #1e3a8a;
+}
+
+.pdf-sheet-signer-title {
+  font-size: 10px;
+  color: #64748b;
+  border-top: 1px solid #94a3b8;
+  padding-top: 3px;
+  font-weight: 600;
+}
+
+.pdf-sheet-qr-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.pdf-sheet-qr-code {
+  width: 36px;
+  height: 36px;
+  background: #0f172a;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 7px;
+  font-weight: 800;
+  border-radius: 2px;
+  letter-spacing: 0.5px;
+}
+
+.pdf-sheet-cert-id {
+  font-size: 9px;
+  color: #94a3b8;
+  font-family: monospace;
+}
+
+/* Multi-file Attachment Components */
+.multi-attachment-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.modal-attach-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.modal-attach-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 10px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-md, 6px);
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.modal-attach-item:hover {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+}
+
+.modal-attach-item-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.modal-attach-item-remove:hover {
+  color: #ef4444;
+  background: #fee2e2;
+}
+
+.modal-attach-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--brand-primary);
+  background: #ffffff;
+  border: 1px dashed var(--brand-primary);
+  border-radius: var(--radius-md, 6px);
+  cursor: pointer;
+  margin-top: 6px;
+  transition: all 0.2s ease;
+}
+
+.modal-attach-add-btn:hover {
+  background: #f8fafc;
+}
+
+.attachment-more-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #475569;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  padding: 2px 8px;
+  width: fit-content;
+  white-space: nowrap;
+  line-height: 1.3;
+  cursor: default;
 }
